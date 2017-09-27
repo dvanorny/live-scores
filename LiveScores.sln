@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScores", "LiveScores\LiveScores.csproj", "{54CA9302-0A42-4526-A415-F1BE56EF4230}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScores.UnitTests", "LiveScores.UnitTests\LiveScores.UnitTests.csproj", "{BC9045DE-3F69-4B18-AA57-5356959E0CFF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54CA9302-0A42-4526-A415-F1BE56EF4230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54CA9302-0A42-4526-A415-F1BE56EF4230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54CA9302-0A42-4526-A415-F1BE56EF4230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54CA9302-0A42-4526-A415-F1BE56EF4230}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC9045DE-3F69-4B18-AA57-5356959E0CFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC9045DE-3F69-4B18-AA57-5356959E0CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC9045DE-3F69-4B18-AA57-5356959E0CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC9045DE-3F69-4B18-AA57-5356959E0CFF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FF1DA3EB-3B83-471E-BF7E-DA815800C010}
+	EndGlobalSection
+EndGlobal
