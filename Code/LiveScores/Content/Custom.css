@@ -1,0 +1,9 @@
+﻿body {
+	background: url('Images/background.jpg') no-repeat center center fixed;
+	font-family: 'Open Sans', sans-serif;
+	background-size: cover;
+	padding: 0 30px 30px;
+}
+.navbar-inverse .navbar-brand {
+	color: Orange;
+}

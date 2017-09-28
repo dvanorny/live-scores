@@ -1,0 +1,165 @@
+﻿.color-orange {
+	color: orange;
+}
+
+body {
+	padding-top: 50px;
+	padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+	padding-top: 65px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+	white-space: normal;
+}
+
+.hoverTable {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.hoverTable td {
+	padding: 7px;
+	border: #4e95f4 1px solid;
+}
+
+.hoverTable tr {
+	background: #EDEEEF;
+}
+
+.hoverTable tr:nth-child(even) {
+	background: #ffffff;
+}
+
+.hoverTable th {
+	background: #6FA8D9;
+	border: #EDEEEF 1px solid;
+}
+
+.hoverTable tr:hover {
+	background-color: #FF9C51;
+}
+	
+.greeniconcolor {
+	color: green;
+	size: 1.3em;
+}
+
+.purpleiconcolor {
+	color: purple;
+	size: 1.6em;
+	margin-left: -2px;
+}
+
+.rediconcolor {
+	color: red;
+	size: 1.3em;
+}
+
+.linkbutton {
+	width: 50px;
+}
+
+.idwidth {
+	width: 75px;
+}
+
+.grid-width-1200 {
+	width: 1200px;
+}
+
+.notesColumnWidth {
+	width: 600px;
+	white-space: pre-wrap;      /* CSS3 */   
+	white-space: -moz-pre-wrap; /* Firefox */    
+	white-space: -pre-wrap;     /* Opera <7 */   
+	white-space: -o-pre-wrap;   /* Opera 7 */    
+	word-wrap: break-word;      /* IE */
+}
+.mvc-grid td.number {
+	text-align: right;
+}
+
+.mvc-grid td.nowrap {
+	white-space: nowrap;
+}
+
+.list-title {
+	color: white;
+	font-size: 22px;
+	margin-top: 0;
+}
+
+.new-site-button {
+	width: 100px;
+	float: right;
+	margin-bottom: 10px;
+	margin-top: -38px;
+	padding: 5px;
+}
+a.right-hand-link {
+	width: 100px;
+	float: right;
+	margin-bottom: 10px;
+	margin-top: -38px;
+	padding: 5px;
+}
+.btn-save-width {
+	width: 90px;
+}
+/* Tooltip container */
+.tooltip {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+	visibility: hidden;
+	width: 120px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	padding: 5px 0;
+	border-radius: 6px;
+	/* Position the tooltip text */
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -60px;
+	/* Fade in tooltip */
+	opacity: 0;
+	transition: opacity 1s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+}
+
+.smallcolumn {
+	font-size: 9px;
+}

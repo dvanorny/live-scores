@@ -1,0 +1,138 @@
+﻿@using System.Web.UI.HtmlControls
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>LVFC Scoreboard</title>
+	<link rel="icon" href="@Url.Content("~/favicon.ico")" />
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+	@Styles.Render("~/Content/JQueryUI/Bundle")
+	@Styles.Render("~/Content/Bootstrap/Bundle")
+	@Styles.Render("~/Content/FontAwesome/Bundle")
+	@Styles.Render("~/Content/MvcGrid/Bundle")
+	<link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/DataTables/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/DataTables/css/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/DataTables/css/select.bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/Shared/base.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/site.css" rel="stylesheet" type="text/css" runat="server" id="siteStyleSheet" />
+	<link href="@Url.Action("Index", "Style")" rel="stylesheet" type="text/css" />
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<div>
+					@Html.ActionLink("LIVE SCORES", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+				</div>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					@helper GlobalNavLink(string name, string controllerName, string actionName = "Index")
+					{
+var currentControllerName = ViewContext.RouteData.Values["controller"] as string;
+string liClassName;
+if (controllerName.Equals(currentControllerName, StringComparison.OrdinalIgnoreCase))
+{
+	liClassName = "active";
+}
+else
+{
+	liClassName = null;
+}
+				<li style="font-size:16pt;" class="@liClassName">@Html.ActionLink(name, actionName, controllerName)</li>
+}
+					@GlobalNavLink("Scoreboard", "Scoreboard")
+					@*@GlobalNavLink("SB", "ServiceBridge")
+					@GlobalNavLink("PR", "PatientRegistry")
+					@GlobalNavLink("RB", "ResourceBridge")
+					@GlobalNavLink("Lic", "Licensure")
+					@GlobalNavLink("BB", "BillingBridge")
+                    @GlobalNavLink("Cont","Continuum")
+					@GlobalNavLink("Uptime", "Uptime")
+					@GlobalNavLink("Search", "Search", "FindSites")*@
+				</ul>
+				<p class="nav navbar-text navbar-right">
+					@User.Identity.Name!
+				&nbsp;@Html.ActionLink("(Settings)", "Edit", "Style")
+			</p>
+			<p class="nav navbar-text navbar-right">
+				<select id="refreshSelect" title="Auto-Refresh">
+					<option value="1800000">Auto-Refresh</option>
+					<option value="1800000">None</option>
+					<option value="30000">30 Seconds</option>
+					<option value="60000">1 Minute</option>
+					<option value="300000">5 Minute</option>
+				</select>
+			</p>
+		</div>
+	</div>
+</div>
+
+<div style="color: maroon; margin-top:10px; margin-left: 60px; margin-right: 60px; padding: 10px; background-color: lightblue; display:@ViewBag.DisplayBanner;">
+	<div>
+		New LVFC site...enjoy!
+	</div>
+	<div class="text-right" style="margin-top:-20px">
+		<a href="@Url.Action("CloseBanner", "Base")">Close</a>
+	</div>
+</div>
+
+<div class="container body-content">
+
+	@RenderBody()
+	<hr />
+	<footer>
+		@*<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
+	</footer>
+</div>
+
+@Scripts.Render("~/Scripts/JQuery/Bundle")
+@Scripts.Render("~/Scripts/Bootstrap/Bundle")
+@Scripts.Render("~/Scripts/JQueryUI/Bundle")
+@Scripts.Render("~/Scripts/MvcGrid/Bundle")
+@Scripts.Render("~/Scripts/Shared/Bundle")
+	@Scripts.Render("~/Scripts/DataTables/jquery.dataTables.min.js")
+	@Scripts.Render("~/Scripts/DataTables/dataTables.bootstrap4.min.js")
+	@Scripts.Render("~/Scripts/jszip.min.js")
+@Scripts.Render("~/Scripts/DataTables/extensions/Buttons/js/dataTables.Buttons.min.js")
+@Scripts.Render("~/Scripts/DataTables/extensions/Buttons/js/buttons.html5.min.js")
+@Scripts.Render("~/Scripts/DataTables/extensions/Responsive/js/dataTables.responsive.min.js")
+@Scripts.Render("~/Scripts/DataTables/extensions/Select/js/dataTables.select.min.js") 
+@RenderSection("scripts", required: false)
+
+<script>
+	//$("#refreshSelect").change(function (){
+	//	alert($(this).val());
+	//});
+
+	$(document).ready(function () {
+		var refreshRate = localStorage.getItem("refresh-rate");
+		if (refreshRate != null && refreshRate != "") {
+			$('#refreshSelect').val(refreshRate);
+			$('#refreshSelect').change();
+		}
+	});
+
+	$('#refreshSelect').change(function () {
+		$(this).find(":selected").each(function () {
+			var newVal = $(this).val();
+			console.log("Auto refreshed changed to: " + newVal);
+			localStorage.setItem("refresh-rate", newVal);
+			setInterval('window.location.reload()', newVal);
+		});
+	});
+</script>
+
+
+</body>
+
+</html>
