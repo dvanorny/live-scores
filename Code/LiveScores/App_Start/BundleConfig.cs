@@ -22,7 +22,6 @@ namespace LiveScores
             bundles.Add(new ScriptBundle("~/Scripts/JQueryUI/Bundle").Include("~/Scripts/JQueryUI/*.js"));
             bundles.Add(new ScriptBundle("~/Scripts/MvcGrid/Bundle").Include("~/Scripts/MvcGrid/*.js"));
             bundles.Add(new ScriptBundle("~/Scripts/Shared/Bundle").Include("~/Scripts/Shared/*.js"));
-            bundles.Add(new ScriptBundle("~/Scripts/DataTables/Bundle").Include("~/Scripts/DataTables/*.js"));
 		}
         private static void RegisterStyles(BundleCollection bundles)
         {
@@ -31,7 +30,6 @@ namespace LiveScores
             bundles.Add(new StyleBundle("~/Content/FontAwesome/Bundle").Include("~/Content/FontAwesome/*.css"));
             bundles.Add(new StyleBundle("~/Content/MvcGrid/Bundle").Include("~/Content/MvcGrid/*.css"));
             bundles.Add(new StyleBundle("~/Content/Shared/Bundle").Include("~/Content/Shared/*.css"));
-            bundles.Add(new StyleBundle("~/Content/Datatables/Bundle").Include("~/Content/DataTables/css/*.css"));
 		}
     }
 }

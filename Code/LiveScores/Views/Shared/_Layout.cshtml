@@ -12,10 +12,6 @@
 	@Styles.Render("~/Content/Bootstrap/Bundle")
 	@Styles.Render("~/Content/FontAwesome/Bundle")
 	@Styles.Render("~/Content/MvcGrid/Bundle")
-	<link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-	<link href="~/Content/DataTables/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
-	<link href="~/Content/DataTables/css/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="~/Content/DataTables/css/select.bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="~/Content/Shared/base.css" rel="stylesheet" type="text/css" />
 	<link href="~/Content/site.css" rel="stylesheet" type="text/css" runat="server" id="siteStyleSheet" />
 	<link href="@Url.Action("Index", "Style")" rel="stylesheet" type="text/css" />
@@ -38,18 +34,19 @@
 				<ul class="nav navbar-nav">
 					@helper GlobalNavLink(string name, string controllerName, string actionName = "Index")
 					{
-var currentControllerName = ViewContext.RouteData.Values["controller"] as string;
-string liClassName;
-if (controllerName.Equals(currentControllerName, StringComparison.OrdinalIgnoreCase))
-{
-	liClassName = "active";
-}
-else
-{
-	liClassName = null;
-}
-				<li style="font-size:16pt;" class="@liClassName">@Html.ActionLink(name, actionName, controllerName)</li>
-}
+						var currentControllerName = ViewContext.RouteData.Values["controller"] as string;
+						string liClassName;
+						if (controllerName.Equals(currentControllerName, StringComparison.OrdinalIgnoreCase))
+						{
+							liClassName = "active";
+						}
+						else
+						{
+							liClassName = null;
+						}
+					
+						<li style="font-size:16pt;" class="@liClassName">@Html.ActionLink(name, actionName, controllerName)</li>
+					}
 					@GlobalNavLink("Scoreboard", "Scoreboard")
 					@*@GlobalNavLink("SB", "ServiceBridge")
 					@GlobalNavLink("PR", "PatientRegistry")
@@ -61,7 +58,7 @@ else
 					@GlobalNavLink("Search", "Search", "FindSites")*@
 				</ul>
 				<p class="nav navbar-text navbar-right">
-					@User.Identity.Name!
+					@Environment.UserName
 				&nbsp;@Html.ActionLink("(Settings)", "Edit", "Style")
 			</p>
 			<p class="nav navbar-text navbar-right">
@@ -100,13 +97,7 @@ else
 @Scripts.Render("~/Scripts/JQueryUI/Bundle")
 @Scripts.Render("~/Scripts/MvcGrid/Bundle")
 @Scripts.Render("~/Scripts/Shared/Bundle")
-	@Scripts.Render("~/Scripts/DataTables/jquery.dataTables.min.js")
-	@Scripts.Render("~/Scripts/DataTables/dataTables.bootstrap4.min.js")
 	@Scripts.Render("~/Scripts/jszip.min.js")
-@Scripts.Render("~/Scripts/DataTables/extensions/Buttons/js/dataTables.Buttons.min.js")
-@Scripts.Render("~/Scripts/DataTables/extensions/Buttons/js/buttons.html5.min.js")
-@Scripts.Render("~/Scripts/DataTables/extensions/Responsive/js/dataTables.responsive.min.js")
-@Scripts.Render("~/Scripts/DataTables/extensions/Select/js/dataTables.select.min.js") 
 @RenderSection("scripts", required: false)
 
 <script>
