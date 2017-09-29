@@ -8,10 +8,10 @@
 	<title>LVFC Scoreboard</title>
 	<link rel="icon" href="@Url.Content("~/favicon.ico")" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-	@Styles.Render("~/Content/JQueryUI/Bundle")
-	@Styles.Render("~/Content/Bootstrap/Bundle")
-	@Styles.Render("~/Content/FontAwesome/Bundle")
-	@Styles.Render("~/Content/MvcGrid/Bundle")
+	@Styles.Render("~/Content/JQueryUI/JQueryStyleBundle")
+	@Styles.Render("~/Content/Bootstrap/BootstrapStyleBundle")
+	@Styles.Render("~/Content/FontAwesome/FontAwesomeBundle")
+	@Styles.Render("~/Content/MvcGrid/MvcGridStyleBundle")
 	<link href="~/Content/Shared/base.css" rel="stylesheet" type="text/css" />
 	<link href="~/Content/site.css" rel="stylesheet" type="text/css" runat="server" id="siteStyleSheet" />
 	<link href="@Url.Action("Index", "Style")" rel="stylesheet" type="text/css" />
@@ -74,11 +74,11 @@
 	</div>
 </div>
 
-<div style="color: maroon; margin-top:10px; margin-left: 60px; margin-right: 60px; padding: 10px; background-color: lightblue; display:@ViewBag.DisplayBanner;">
-	<div>
+<div style="color: maroon; display:@ViewBag.DisplayBanner;">
+	<div style="background: lightblue; padding: 10px;margin-left: 40px; margin-right: 40px; margin-top:10px; ">
 		New LVFC site...enjoy!
 	</div>
-	<div class="text-right" style="margin-top:-20px">
+	<div class="text-right" style="margin-top: -30px; margin-right: 50px;">
 		<a href="@Url.Action("CloseBanner", "Base")">Close</a>
 	</div>
 </div>
@@ -92,11 +92,11 @@
 	</footer>
 </div>
 
-@Scripts.Render("~/Scripts/JQuery/Bundle")
-@Scripts.Render("~/Scripts/Bootstrap/Bundle")
-@Scripts.Render("~/Scripts/JQueryUI/Bundle")
-@Scripts.Render("~/Scripts/MvcGrid/Bundle")
-@Scripts.Render("~/Scripts/Shared/Bundle")
+@Scripts.Render("~/Scripts/JQuery/JQueryBundle")
+@Scripts.Render("~/Scripts/Bootstrap/BootstrapBundle")
+@Scripts.Render("~/Scripts/JQueryUI/JQueryBundle")
+@Scripts.Render("~/Scripts/MvcGrid/MvcGridBundle")
+@Scripts.Render("~/Scripts/Shared/SharedBundle")
 	@Scripts.Render("~/Scripts/jszip.min.js")
 @RenderSection("scripts", required: false)
 
