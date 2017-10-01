@@ -151,3 +151,37 @@ ALTER TABLE [dbo].[UserStyles] ADD  CONSTRAINT [DF_UserStyles_IsSavedStyle]  DEF
 GO
 
 
+/****** Object:  Table [dbo].[Bets]    Script Date: 10/1/2017 12:00:11 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Bets](
+	[BetId] [int] IDENTITY(1,1) NOT NULL,
+	[BetDate] [datetime] NOT NULL,
+	[Sport] [varchar](10) NULL,
+	[Details] [varchar](max) NULL,
+	[Risking] [money] NOT NULL,
+	[ToCollect] [money] NULL,
+	[Outcome] [varchar](1) NULL,
+	[GroupBet] [varchar](1) NULL,
+	[PersonVanorny] [bit] NULL,
+	[PersonBorst] [bit] NULL,
+	[PersonTschida] [bit] NULL,
+	[PersonLesinski] [bit] NULL,
+	[PersonKerber] [bit] NULL,
+	[Notes] [varchar](max) NULL,
+	[CreatedOn] [datetime] NULL,
+ CONSTRAINT [PK_Bets] PRIMARY KEY CLUSTERED 
+(
+	[BetId] DESC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+GO
+
+ALTER TABLE [dbo].[Bets] ADD  CONSTRAINT [DF_Bets_CreatedOn]  DEFAULT (getdate()) FOR [CreatedOn]
+GO
+
+

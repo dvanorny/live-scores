@@ -34,94 +34,96 @@
 				<ul class="nav navbar-nav">
 					@helper GlobalNavLink(string name, string controllerName, string actionName = "Index")
 					{
-						var currentControllerName = ViewContext.RouteData.Values["controller"] as string;
-						string liClassName;
-						if (controllerName.Equals(currentControllerName, StringComparison.OrdinalIgnoreCase))
-						{
-							liClassName = "active";
-						}
-						else
-						{
-							liClassName = null;
-						}
-					
-						<li style="font-size:16pt;" class="@liClassName">@Html.ActionLink(name, actionName, controllerName)</li>
-					}
+var currentControllerName = ViewContext.RouteData.Values["controller"] as string;
+string liClassName;
+if (controllerName.Equals(currentControllerName, StringComparison.OrdinalIgnoreCase))
+{
+	liClassName = "active";
+}
+else
+{
+	liClassName = null;
+}
+
+					<li style="font-size:16pt;" class="@liClassName">@Html.ActionLink(name, actionName, controllerName)</li>
+}
 					@GlobalNavLink("Scoreboard", "Scoreboard")
+					@GlobalNavLink("Bets", "Bets")
+
 					@*@GlobalNavLink("SB", "ServiceBridge")
-					@GlobalNavLink("PR", "PatientRegistry")
-					@GlobalNavLink("RB", "ResourceBridge")
-					@GlobalNavLink("Lic", "Licensure")
-					@GlobalNavLink("BB", "BillingBridge")
-                    @GlobalNavLink("Cont","Continuum")
-					@GlobalNavLink("Uptime", "Uptime")
-					@GlobalNavLink("Search", "Search", "FindSites")*@
+						@GlobalNavLink("PR", "PatientRegistry")
+						@GlobalNavLink("RB", "ResourceBridge")
+						@GlobalNavLink("Lic", "Licensure")
+						@GlobalNavLink("BB", "BillingBridge")
+						@GlobalNavLink("Cont","Continuum")
+						@GlobalNavLink("Uptime", "Uptime")
+						@GlobalNavLink("Search", "Search", "FindSites")*@
 				</ul>
 				<p class="nav navbar-text navbar-right">
 					@Environment.UserName
-				&nbsp;@Html.ActionLink("(Settings)", "Edit", "Style")
-			</p>
-			<p class="nav navbar-text navbar-right">
-				<select id="refreshSelect" title="Auto-Refresh">
-					<option value="1800000">Auto-Refresh</option>
-					<option value="1800000">None</option>
-					<option value="30000">30 Seconds</option>
-					<option value="60000">1 Minute</option>
-					<option value="300000">5 Minute</option>
-				</select>
-			</p>
+					&nbsp;@Html.ActionLink("(Settings)", "Edit", "Style")
+				</p>
+				<p class="nav navbar-text navbar-right">
+					<select id="refreshSelect" title="Auto-Refresh">
+						<option value="1800000">Auto-Refresh</option>
+						<option value="1800000">None</option>
+						<option value="30000">30 Seconds</option>
+						<option value="60000">1 Minute</option>
+						<option value="300000">5 Minute</option>
+					</select>
+				</p>
+			</div>
 		</div>
 	</div>
-</div>
 
-<div style="color: maroon; display:@ViewBag.DisplayBanner;">
-	<div style="background: lightblue; padding: 10px;margin-left: 40px; margin-right: 40px; margin-top:10px; ">
-		New LVFC site...enjoy!
+	<div style="color: maroon; display:@ViewBag.DisplayBanner;">
+		<div style="background: lightblue; padding: 10px;margin-left: 40px; margin-right: 40px; margin-top:10px; ">
+			New LVFC site...enjoy!
+		</div>
+		<div class="text-right" style="margin-top: -30px; margin-right: 50px;">
+			<a href="@Url.Action("CloseBanner", "Base")">Close</a>
+		</div>
 	</div>
-	<div class="text-right" style="margin-top: -30px; margin-right: 50px;">
-		<a href="@Url.Action("CloseBanner", "Base")">Close</a>
+
+	<div class="container body-content">
+
+		@RenderBody()
+		<hr />
+		<footer>
+			@*<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
+		</footer>
 	</div>
-</div>
 
-<div class="container body-content">
-
-	@RenderBody()
-	<hr />
-	<footer>
-		@*<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
-	</footer>
-</div>
-
-@Scripts.Render("~/Scripts/JQuery/JQueryBundle")
-@Scripts.Render("~/Scripts/Bootstrap/BootstrapBundle")
-@Scripts.Render("~/Scripts/JQueryUI/JQueryBundle")
-@Scripts.Render("~/Scripts/MvcGrid/MvcGridBundle")
-@Scripts.Render("~/Scripts/Shared/SharedBundle")
+	@Scripts.Render("~/Scripts/JQuery/JQueryBundle")
+	@Scripts.Render("~/Scripts/Bootstrap/BootstrapBundle")
+	@Scripts.Render("~/Scripts/JQueryUI/JQueryBundle")
+	@Scripts.Render("~/Scripts/MvcGrid/MvcGridBundle")
+	@Scripts.Render("~/Scripts/Shared/SharedBundle")
 	@Scripts.Render("~/Scripts/jszip.min.js")
-@RenderSection("scripts", required: false)
+	@RenderSection("scripts", required: false)
 
-<script>
-	//$("#refreshSelect").change(function (){
-	//	alert($(this).val());
-	//});
+	<script>
+		//$("#refreshSelect").change(function (){
+		//	alert($(this).val());
+		//});
 
-	$(document).ready(function () {
-		var refreshRate = localStorage.getItem("refresh-rate");
-		if (refreshRate != null && refreshRate != "") {
-			$('#refreshSelect').val(refreshRate);
-			$('#refreshSelect').change();
-		}
-	});
-
-	$('#refreshSelect').change(function () {
-		$(this).find(":selected").each(function () {
-			var newVal = $(this).val();
-			console.log("Auto refreshed changed to: " + newVal);
-			localStorage.setItem("refresh-rate", newVal);
-			setInterval('window.location.reload()', newVal);
+		$(document).ready(function () {
+			var refreshRate = localStorage.getItem("refresh-rate");
+			if (refreshRate != null && refreshRate !== "") {
+				$('#refreshSelect').val(refreshRate);
+				$('#refreshSelect').change();
+			}
 		});
-	});
-</script>
+
+		$('#refreshSelect').change(function () {
+			$(this).find(":selected").each(function () {
+				var newVal = $(this).val();
+				console.log("Auto refreshed changed to: " + newVal);
+				localStorage.setItem("refresh-rate", newVal);
+				setInterval('window.location.reload()', newVal);
+			});
+		});
+	</script>
 
 
 </body>

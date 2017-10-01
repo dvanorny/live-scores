@@ -204,9 +204,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BetsController.cs" />
     <Compile Include="Controllers\StyleController.cs" />
     <Compile Include="Controllers\ScoreboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Entities\BetObj.cs" />
     <Compile Include="Entities\NflGame.cs" />
     <Compile Include="Entities\StyleObj.cs" />
     <Compile Include="Entities\PageViewItem.cs" />
@@ -218,6 +220,7 @@
     <Compile Include="Entities\SettingObj.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Entities\StyleEditPageObj.cs" />
+    <Compile Include="ViewModels\BetsVM.cs" />
     <Compile Include="ViewModels\ScoreboardVM.cs" />
     <Compile Include="ViewModels\StyleVM.cs" />
     <Compile Include="ViewModels\SharedVM.cs" />
@@ -316,15 +319,16 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Scoreboard\Edit.cshtml" />
     <Content Include="Views\Scoreboard\Index.cshtml" />
-    <Content Include="Views\Scoreboard\Add.cshtml" />
     <Content Include="Views\Style\Edit.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Shared\MvcGrid\_Pager.cshtml" />
     <Content Include="Views\Shared\MvcGrid\_Grid.cshtml" />
     <Content Include="Views\Shared\MvcGrid\_AjaxGrid.cshtml" />
+    <Content Include="Views\Bets\Add.cshtml" />
+    <Content Include="Views\Bets\Edit.cshtml" />
+    <Content Include="Views\Bets\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

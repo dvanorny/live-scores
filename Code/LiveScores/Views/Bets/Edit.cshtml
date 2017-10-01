@@ -1,26 +1,9 @@
-﻿@model LiveScores.Entities.NflGame
+﻿@model LiveScores.Entities.BetObj
 
 <div style="background:White; padding:10px;">
-	<div class="col-sm-offset-2 col-sm-10" style="margin-bottom:10px;">
-		<table>
-			<tr>
-				<td>
-					<button id="btnBackClick" class="btn btn-info"><i class='fa fa-chevron-circle-left'></i> Back</button>
-				</td>
-				<td>
-					&nbsp;
-					<button id="btnAutoLogin" class="btn btn-warning" data-id="@(Model.SiteID)"><i class='fa fa-external-link'></i> Auto Login</button>
-				</td>
-				<td>
-					&nbsp;
-					<button id="btnLoginPage" class="btn" data-id="@(Model.SiteUrl)"><i class='fa fa-external-link'></i> Login Page</button>
-				</td>
-			</tr>
-		</table>
-	</div>
-
 	@using (Html.BeginForm())
-	{
+	{ }
+	@*{
 		<div class="form-horizontal">
 			<div class="form-group">
 				<label for="lblSiteID" class="col-sm-2 control-label">Site ID</label>
@@ -94,43 +77,11 @@
 		</div>
 		@Html.HiddenFor(x => x.SiteID)
 		@Html.HiddenFor(x => x.LoginPwd)
-	}
+	}*@
 </div>
 
 @section scripts {
 	<script>
-		$("#pwd1").change(function () {
-			$("#LoginPwd").val($("#pwd1").val());
-		});
-
-		$("#btnBackClick").click(function () {
-			window.history.back();
-		});
-
-		$("#btnAutoLogin").click(function () {
-			var siteId = $(this).attr("data-id");
-			var url = "../AutoLogin/" + siteId;
-			window.open(url);
-		});
-
-		$("#btnLoginPage").click(function () {
-			var thisUrl = $(this).attr("data-id");
-			window.open(thisUrl);
-		});
-
-		function toggle_password(target) {
-			var d = document;
-			var tag = d.getElementById(target);
-			var tag2 = d.getElementById("showhide");
-
-			if (tag2.innerHTML === 'Show') {
-				tag.setAttribute('type', 'text');
-				tag2.innerHTML = 'Hide';
-
-			} else {
-				tag.setAttribute('type', 'password');
-				tag2.innerHTML = 'Show';
-			}
-		}
+		
 	</script>
 }

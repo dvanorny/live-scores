@@ -3,6 +3,10 @@
 	outline: none !important;
 }
 
+.cell-center {
+	text-align: center;
+}
+
 body {
 	background: url(../../Images/background.jpg) no-repeat center center fixed;
 	font-family: 'Open Sans', sans-serif;
