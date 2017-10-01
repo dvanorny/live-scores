@@ -29,5 +29,28 @@ namespace LiveScores.Entities
 				return false;
 			}
 		}
+
+		public string OutcomeStyle
+		{
+			get
+			{
+				if (Outcome.ToUpper() == "W")
+				{
+					return "cell-win";
+				}
+				else if (Outcome.ToUpper() == "L")
+				{
+					return "cell-loss";
+				}
+				else if (Outcome.ToUpper() == "P")
+				{
+					return "cell-push";
+				}
+				else
+				{
+					return "";
+				}
+			}
+		}
 	}
 }

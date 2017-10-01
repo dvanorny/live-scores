@@ -1,6 +1,4 @@
-﻿.cell-center {
-	text-align: center;
-}
+﻿
 .color-orange {
 	color: orange;
 }
@@ -165,4 +163,20 @@ a.right-hand-link {
 
 .smallcolumn {
 	font-size: 9px;
+}
+
+.cell-center {
+	text-align: center;
+}
+.cell-win {
+	background: #32cd32;
+	text-decoration: white;
+}
+.cell-loss {
+	background: #ff0000;
+	text-decoration: white;
+}
+.cell-push {
+	background: grey;
+	text-decoration: white;
 }

@@ -19,13 +19,14 @@
 		.Grid(Model)
 		.Build(columns =>
 		{
-			columns.Add(model => model.BetId).Titled("ID").Css("cell-center");
-			columns.Add(model => model.Sport).Titled("Sport").Css("cell-center");
+			columns.Add(model => model.BetId).RenderedAs(model => "<div align='center'>" + model.BetId + "</div>").Encoded(false).Titled("ID");
+			columns.Add(model => model.Sport).RenderedAs(model => "<div align='center'>" + model.Sport + "</div>").Encoded(false).Titled("Sport");
 			columns.Add(model => model.BetDate).RenderedAs(model => model.BetDate.ToShortDateString()).Titled("Date");
 			columns.Add(model => model.Details).Titled("Description");
 			columns.Add(model => model.Risking).RenderedAs(model => model.Risking.ToString("C")).Titled("Risking");
-			columns.Add(model => model.ToCollect).RenderedAs(model => model.ToCollect.ToString("C")).Titled("To Collect");
-			columns.Add(model => model.Outcome).Titled("Outcome").Css("cell-center");
+			columns.Add(model => model.ToCollect).RenderedAs(model => model.ToCollect.ToString("C")).Titled("ToCollect");
+			columns.Add(model => model.GroupBet).RenderedAs(model => "<div align='center'>" + model.GroupBet.ToUpper() + "</div>").Encoded(false).Titled("Group");
+			columns.Add(model => model.Outcome).RenderedAs(model => "<div align='center' class=\"" + model.OutcomeStyle + "\">" + model.Outcome + "</div>").Encoded(false).Titled("Outcome");
 			//columns.Add(model => model.SiteUpFilter).RenderedAs(model => "<div align='center'><span style='width:15px; display:inline-block;'><i class=\"" + model.SiteUpDisplay + " " + model.SiteUpDisplayColor + " style=\"font-size:1.3em\" aria-hidden='true'></i></span><span style='width:30px; display:inline-block;'>" + model.SiteID + "</span></div>").Titled("ID").Encoded(false).Filterable(true).Sortable(false);
 			//columns.Add(model => "<div align='center'><button onclick=\"openLoginPage(" + model.SiteID + ")\" id=\"btnLogin\" class=\"btn-warning\" data-id=\"" + model.SiteID + "\"><i class='fa fa-sign-in' aria-hidden='true'></i></button></div>").Encoded(false).Css("linkbutton");
 			//columns.Add(model => model.SiteName).Titled("Site Name").Filterable(true);

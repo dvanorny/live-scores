@@ -16,6 +16,23 @@
 	<link href="~/Content/site.css" rel="stylesheet" type="text/css" runat="server" id="siteStyleSheet" />
 	<link href="@Url.Action("Index", "Style")" rel="stylesheet" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	<style>
+		.cell-center {
+			text-align: center;
+		}
+		.cell-win {
+			background: #32cd32;
+			color: white;
+		}
+		.cell-loss {
+			background: #ff0000;
+			color: black;
+		}
+		.cell-push {
+			background: grey;
+			color: black;
+		}
+	</style>
 </head>
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
