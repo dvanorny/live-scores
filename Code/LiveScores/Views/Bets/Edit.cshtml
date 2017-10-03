@@ -2,71 +2,51 @@
 
 <div style="background:White; padding:10px;">
 	@using (Html.BeginForm())
-	{ }
-	@*{
+	
+	{
 		<div class="form-horizontal">
 			<div class="form-group">
-				<label for="lblSiteID" class="col-sm-2 control-label">Site ID</label>
+				<label for="lblSiteID" class="col-sm-2 control-label">Bet ID</label>
 				<div class="col-sm-10" style="margin-top:7px;">
-					@Html.DisplayFor(x => x.SiteID)
+					@Html.DisplayFor(x => x.BetId)
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Site Name</label>
+				<label class="col-sm-2 control-label">Bet Date</label>
 				<div class="col-sm-10">
-					@Html.TextBoxFor(x => x.SiteName, new { Style = "width:200px; padding:2px;", @class = "form-control" })
+					@Html.TextBoxFor(x => x.BetDate, new { Type = "date", Style = "width:200px; padding:2px;", @class = "form-control" })
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Database Server</label>
+				<label class="col-sm-2 control-label">Sport</label>
 				<div class="col-sm-10">
-					@Html.TextBoxFor(x => x.DatabaseServer, new { Style = "width:200px; padding:2px;", @class = "form-control" })
+					@Html.TextBoxFor(x => x.Sport, new { Style = "width:100px; padding:2px;", @class = "form-control" })
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Database Name</label>
+				<label class="col-sm-2 control-label">Details</label>
 				<div class="col-sm-10">
-					@Html.TextBoxFor(x => x.DatabaseName, new { Style = "width:200px; padding:2px;", @class = "form-control" })
+					@Html.TextBoxFor(x => x.Details, new { Style = "width:400px; padding:2px;", @class = "form-control" })
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">URL</label>
+				<label class="col-sm-2 control-label">Risking ($)</label>
 				<div class="col-sm-10">
-					@Html.TextBoxFor(x => x.SiteUrl, new { Style = "width:400px; padding:2px;", @class = "form-control" })
+					@Html.TextBoxFor(x => x.Risking, new { Style = "width:100px; padding:2px;", @class = "form-control" })
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Overseer ID</label>
+				<label class="col-sm-2 control-label">To Collect ($)</label>
 				<div class="col-sm-10">
-					@Html.TextBoxFor(x => x.OverseerId, new { Style = "width:400px; padding:2px;", @class = "form-control" })
+					@Html.TextBoxFor(x => x.ToCollect, new { Style = "width:100px; padding:2px;", @class = "form-control" })
 				</div>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Username</label>
-				<div class="col-sm-10">
-					@Html.TextBoxFor(x => x.LoginUser, new { Style = "width:400px; padding:2px;", @class = "form-control" })
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="lblPassword" class="col-sm-2 control-label">Password</label>
-				<div class="col-sm-10">
-					<input type="password" value="@(Model.LoginPwd)" name="pwd1" id="pwd1" style="width:200px;" class="form-control" />
-					&nbsp;
-					<a href="#" onclick="toggle_password('pwd1');" id="showhide">Show</a>
-				</div>
-			</div>
-			<div class="form-group">
+			@*<div class="form-group">
 				<label class="col-sm-2 control-label">Self-Hosted</label>
 				<div class="col-sm-10">
-					@Html.CheckBoxFor(x => x.SelfHosted, new { Style = "width:20px;margin:0;", @class = "form-control" })
+					@Html.CheckBoxFor(x => x.GroupBet, new { Style = "width:20px;margin:0;", @class = "form-control" })
 				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Notes</label>
-				<div class="col-sm-10">
-					@Html.TextAreaFor(model => model.Notes)
-				</div>
-			</div>
+			</div>*@
 			<div class="form-group" style="margin-top:10px;">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" class="btn btn-success btn-save-width">
@@ -75,9 +55,8 @@
 				</div>
 			</div>
 		</div>
-		@Html.HiddenFor(x => x.SiteID)
-		@Html.HiddenFor(x => x.LoginPwd)
-	}*@
+		@Html.HiddenFor(x => x.BetId)
+	}
 </div>
 
 @section scripts {

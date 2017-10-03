@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.EnterpriseServices.Internal;
 
 namespace LiveScores.Entities
@@ -7,10 +8,20 @@ namespace LiveScores.Entities
 	{
 		public int BetId { get; set; }
 		public string Sport { get; set; }
+
+		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yy}", ConvertEmptyStringToNull = true)]
 		public DateTime BetDate { get; set; }
+
 		public string Details { get; set; }
-		public double Risking { get; set; }
-		public double ToCollect { get; set; }
+
+		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:0.00}", ConvertEmptyStringToNull = true)]
+		[DataType(DataType.Currency)]
+		public decimal Risking { get; set; }
+
+		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:0.00}", ConvertEmptyStringToNull = true)]
+		[DataType(DataType.Currency)]
+		public decimal ToCollect { get; set; }
+
 		public string Outcome { get; set; }
 		public string GroupBet { get; set; }
 		public bool PersonVanorny { get; set; }

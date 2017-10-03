@@ -33,7 +33,7 @@
 			//columns.Add(model => model.SiteUrl).Titled("URL").Filterable(true);
 			//columns.Add(model => model.DatabaseServer).Titled("DB Server").Filterable(true);
 			//columns.Add(model => model.SelfHosted).RenderedAs(model => "<div align='center'><i class=\"" + model.SelfHostedDisplay + " greeniconcolor\" style=\"font-size:1.3em;\" aria-hidden='true'></i></div>").Titled("SH").Encoded(false).Filterable(true);
-			//columns.Add(model => "<div align='center'><button class=\"edit_button\" style=\"width:65px;\" data-id=\"" + model.SiteID + "\"><i class='fa fa-info-circle' aria-hidden='true'></i> Info</button></div>").Encoded(false);
+			columns.Add(model => "<div align='center'><button class=\"edit_button\" style=\"width:65px;\" data-id=\"" + model.BetId + "\"><i class='fa fa-info-circle' aria-hidden='true'></i> Info</button></div>").Encoded(false);
 		})
 		.Css("hoverTable")
 		.Filterable()
@@ -67,7 +67,7 @@
 		});
 
 		$(document).on('keyup', '#searchbox', function () {
-			if (currentKey == '13') {
+			if (currentKey === '13') {
 				//Enter key pressed
 				var searchValue = $('#searchbox').val();
 				window.location.href = "http://www.vanornys.com/" + searchValue;
@@ -105,15 +105,15 @@
         }
 
         function WireEvents() {
-            @*$(document).on("click", ".edit_button", function () {
+            $(document).on("click", ".edit_button", function () {
                 var site_id = $(this).attr("data-id");
                 console.log("ID: " + site_id);
-                window.location.href = "@Url.Action("Edit", "PatientRegistry")/" + site_id;
+                window.location.href = "@Url.Action("Edit", "Bets")/" + site_id;
             });
 
             $(document).on("click", ".new-site-button", function () {
-                window.location.href = "@Url.Action("Add", "PatientRegistry")";
-            });*@
+                window.location.href = "@Url.Action("Add", "Bets")";
+            });
         }
 	</script>
 }

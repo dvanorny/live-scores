@@ -3,6 +3,7 @@ using LiveScores.ViewModels;
 
 namespace LiveScores.Controllers
 {
+	[RequireHttps]
 	public class ScoreboardController : BaseController
 	{
 		public ActionResult Index()
