@@ -1,0 +1,132 @@
+﻿@model LiveScoresWeb.Entities.StyleEditPageObj
+
+<div style="background:White; padding:10px;">
+	<div style="margin-bottom:10px;">
+		<table>
+			<tr>
+				<td>
+					<button id="btnBackClick" class="btn btn-info"><i class='fa fa-chevron-circle-left'></i> Back</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	@using (Html.BeginForm("LoadStyle", "Style", FormMethod.Post, new { }))
+	{
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label for="lblStyles" class="col-sm-3 control-label"><i>Load Pre-Defined Styles:</i></label>
+				<div class="col-lg-4">
+					@Html.DropDownListFor(m => m.ChosenStyle, Model.DefinedThemes, "Select one")
+					&nbsp;
+					<button type="submit" class="btn btn-warning" style="height: 30px; padding: 2px 20px;">
+						<i class="fa fa-css3"></i> Load Style
+					</button>
+				</div>
+			</div>
+		</div>
+	}
+	@using (Html.BeginForm())
+	{
+		<hr />
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label for="lblFont" class="col-sm-3 control-label">Font Family</label>
+				<div class="col-lg-4" style="margin-top: 7px;">
+					@Html.TextBoxFor(x => x.Styles.FontFamily, new {style="width:300px;"})
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lblFontSize" class="col-sm-3 control-label">Font Size (numbers only)</label>
+				<div class="col-lg-4" style="margin-top: 7px;">
+					@Html.TextBoxFor(x => x.Styles.FontSize, new { style = "width:50px;" })
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lblBkgcColor" class="col-sm-3 control-label">Background Color</label>
+				<div class="col-lg-4" style="margin-top: 7px;">
+					@Html.TextBoxFor(x => x.Styles.BackgroundColor, new { type = "color", style="width:100px;" })
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lblTitleColor" class="col-sm-3 control-label">Color of Site Title</label>
+				<div class="col-lg-4" style="margin-top: 7px;">
+					@Html.TextBoxFor(x => x.Styles.TitleColor, new { type = "color", style = "width:100px;" })
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lblMainLinks" class="col-sm-3 control-label">Main Links Color</label>
+				<div class="col-lg-4" style="margin-top: 7px;">
+					@Html.TextBoxFor(x => x.Styles.MainLinksColor, new { type = "color", style = "width:100px;" })
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lblTopFrame" class="col-sm-3 control-label">Top Frame Background Color</label>
+				<div class="col-lg-4" style="margin-top: 7px;">
+					@Html.TextBoxFor(x => x.Styles.TopFrameColor, new { type = "color", style = "width:100px;" })
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lblTopFrameBorder" class="col-sm-3 control-label">Top Frame Border Color</label>
+				<div class="col-lg-4" style="margin-top: 7px;">
+					@Html.TextBoxFor(x => x.Styles.TopFrameBorderColor, new { type = "color", style = "width:100px;" })
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lblHeaderRow" class="col-sm-3 control-label">HTML Table - Header Row Background Color</label>
+				<div class="col-lg-4" style="margin-top: 7px;">
+					@Html.TextBoxFor(x => x.Styles.TableHeaderRowBackground, new { type = "color", style = "width:100px;" })
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lblTableRow" class="col-sm-3 control-label">HTML Table - Row Background Color</label>
+				<div class="col-lg-4" style="margin-top: 7px;">
+					@Html.TextBoxFor(x => x.Styles.TableRowBackground, new { type = "color", style = "width:100px;" })
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lblTableAlternateRow" class="col-sm-3 control-label">HTML Table - Alternate Row Background Color</label>
+				<div class="col-lg-4" style="margin-top: 7px;">
+					@Html.TextBoxFor(x => x.Styles.TableRowAlternateBackground, new { type = "color", style = "width:100px;" })
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lblCellBorder" class="col-sm-3 control-label">HTML Table - Cell Border Color</label>
+				<div class="col-lg-4" style="margin-top: 7px;">
+					@Html.TextBoxFor(x => x.Styles.TableCellBorder, new { type = "color", style = "width:100px;" })
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lblTablePadding" class="col-sm-3 control-label">HTML Table - Row Padding (numbers only)</label>
+				<div class="col-lg-4" style="margin-top: 7px;">
+					@Html.TextBoxFor(x => x.Styles.TablePadding, new { style = "width:50px;" })
+				</div>
+			</div>
+			
+			<div class="form-group" style="margin-top:10px;">
+				<div class="col-sm-offset-3">
+					<button type="submit" class="btn btn-success btn-save-width" style="margin-left: 15px;">
+						<i class="fa fa-floppy-o"></i> Apply
+					</button>
+				</div>
+			</div>
+		</div>
+			}
+	<br/><br/>
+	<i>Have a style you would like to contribute to the library?  Just let Nick S. know!</i>
+</div>
+
+@section scripts {
+	<script language="javascript">
+	$("select#searchTemplate").change(function () {
+	var selectedTemplate = $("select#searchTemplate").val();
+
+	if (selectedTemplate) {
+		$.ajax({
+			url: '@Url.Action("Edit", "Style")',
+					data: { templateId: selectedTemplate }
+				});
+			}
+		});
+	</script>
+}

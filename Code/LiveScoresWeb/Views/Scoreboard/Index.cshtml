@@ -1,0 +1,114 @@
+﻿@using NonFactors.Mvc.Grid;
+
+@model IEnumerable<LiveScoresWeb.Entities.NflGame>
+<div>
+	<table>
+		<tr>
+			<td>
+				<h3 class="list-title">Current Games</h3>
+			</td>
+			@*<td>
+				<input class="form-control" id="searchbox" type="text" placeholder="Search..." style="width:250px; padding:2px; margin-left: 40px; margin-top: -5px; text-align: left;">
+			</td>*@
+		</tr>
+	</table>
+	@*<button class="new-site-button" style="width:100px;"><i class='fa fa-user-plus' aria-hidden='true'></i> New Site</button>*@
+</div>
+<div>
+	@(Html
+	.Grid(Model)
+	.Build(columns =>
+	{
+		columns.Add(model => model.GameId).Titled("ID").Sortable(false);
+		columns.Add(model => model.DayOfWeek).Titled("Day");
+		columns.Add(model => model.GameTime).Titled("Game Time");
+		columns.Add(model => model.VisitorTeamName).Titled("Visitor");
+		columns.Add(model => model.VisitorScore).Titled("Score"); ;
+		columns.Add(model => model.HomeTeamName).Titled("Home");
+		columns.Add(model => model.HomeScore).Titled("Score");
+		columns.Add(model => model.CurrentQuarter).Titled("Quarter");
+		columns.Add(model => model.InRedzone).Titled("Red Zone");
+		//columns.Add(model => model.SiteUpFilter).RenderedAs(model => "<div align='center'><span style='width:15px; display:inline-block;'><i class=\"" + model.SiteUpDisplay + " " + model.SiteUpDisplayColor + " style=\"font-size:1.3em\" aria-hidden='true'></i></span><span style='width:30px; display:inline-block;'>" + model.SiteID + "</span></div>").Titled("ID").Encoded(false).Filterable(true).Sortable(false);
+		//columns.Add(model => "<div align='center'><button onclick=\"openLoginPage(" + model.SiteID + ")\" id=\"btnLogin\" class=\"btn-warning\" data-id=\"" + model.SiteID + "\"><i class='fa fa-sign-in' aria-hidden='true'></i></button></div>").Encoded(false).Css("linkbutton");
+		//columns.Add(model => model.SiteName).Titled("Site Name").Filterable(true);
+		//columns.Add(model => model.SiteUrl).Titled("URL").Filterable(true);
+		//columns.Add(model => model.DatabaseServer).Titled("DB Server").Filterable(true);
+		//columns.Add(model => model.SelfHosted).RenderedAs(model => "<div align='center'><i class=\"" + model.SelfHostedDisplay + " greeniconcolor\" style=\"font-size:1.3em;\" aria-hidden='true'></i></div>").Titled("SH").Encoded(false).Filterable(true);
+		//columns.Add(model => "<div align='center'><button class=\"edit_button\" style=\"width:65px;\" data-id=\"" + model.SiteID + "\"><i class='fa fa-info-circle' aria-hidden='true'></i> Info</button></div>").Encoded(false);
+	})
+	.Css("hoverTable")
+	.Filterable()
+	.Sortable()
+	)
+</div>
+
+@*<p>
+	<div style="padding-left: 5px; color: AntiqueWhite; font-size: large;" id="currentRowCount">Row Count: </div>
+	<div style="padding-left: 5px; color: aqua; font-size: large;">Total Sites: @ViewBag.SiteCount (@ViewBag.SelfHostedCount are self-hosted)</div>
+</p>
+
+<p>
+	<div style="padding-left: 5px; color: aqua; font-size: small;">
+		Legend: SH = Self-Hosted Site
+	</div>
+</p>*@
+
+
+@section scripts {
+	<script>
+		var currentKey;
+		$(document).keypress(function (e) {
+			currentKey = e.which;
+		});
+
+		$(document).on('keyup', '#searchbox', function () {
+			if (currentKey == '13') {
+				//Enter key pressed
+				var searchValue = $('#searchbox').val();
+				window.location.href = "http://www.vanornys.com/" + searchValue;
+			}
+		});
+	</script>
+	<script>
+	    $(document)
+		    .ready(function () {
+			    //GetCurrentSearch();
+			    //$('#searchbox').focus();
+			    WireEvents();
+
+			    //document.getElementById("currentRowCount").innerHTML = "Row Count: " + document.getElementsByClassName("hoverTable")[0].getElementsByTagName("tbody")[0].getElementsByTagName("tr").length;
+			});
+
+	    function GetCurrentSearch() {
+		    var vars = [], hash;
+		    var q = document.URL.split('?')[1];
+		    if(q != undefined){
+			    q = q.split('&');
+			    for(var i = 0; i < q.length; i++){
+				    hash = q[i].split('=');
+				    vars.push(hash[1]);
+				    vars[hash[0]] = hash[1];
+			    }
+		    }
+		    var searchText = vars['Grid-SiteName-Contains'];
+		    $('#searchbox').val(searchText);
+	    }
+
+        function openLoginPage(id) {
+            //var url = "@Url.Action("AutoLogin", "PatientRegistry")/" + id;
+            window.open(url);
+        }
+
+        function WireEvents() {
+            @*$(document).on("click", ".edit_button", function () {
+                var site_id = $(this).attr("data-id");
+                console.log("ID: " + site_id);
+                window.location.href = "@Url.Action("Edit", "PatientRegistry")/" + site_id;
+            });
+
+            $(document).on("click", ".new-site-button", function () {
+                window.location.href = "@Url.Action("Add", "PatientRegistry")";
+            });*@
+        }
+	</script>
+}

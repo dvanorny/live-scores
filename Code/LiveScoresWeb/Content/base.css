@@ -1,0 +1,116 @@
+﻿* {
+	text-decoration: none !important;
+	outline: none !important;
+}
+
+.cell-center {
+	text-align: center;
+}
+
+body {
+	background: url(../../Images/background.jpg) no-repeat center center fixed;
+	font-family: 'Open Sans', sans-serif;
+	background-size: cover;
+	padding: 0 30px 30px;
+}
+
+.content {
+	padding-top: 30px;
+}
+
+.content-block {
+	text-align: center;
+}
+
+.widget-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 10px 12px;
+    color: #FFFFFF;
+    font-size: 18px;
+}
+
+.ajax-content {
+    min-height: 440px;
+}
+
+.table {
+    margin: 0;
+}
+
+.action {
+    width: 1px;
+}
+
+.table thead {
+    background: rgba(255, 255, 255, 0.5);
+    border: 0 none;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.btn {
+    border: 3px solid transparent;
+    border-radius: 0;
+    padding: 5px 9px;
+}
+
+.btn-sm {
+    border-width: 1px;
+}
+
+.btn-success {
+    background-color: rgba(94, 186, 103, 0.75);
+    color: #ffffff;
+}
+
+.btn-danger {
+    background-color: #ce948d;
+    color: #ffffff;
+}
+
+.mvc-grid-pager {
+    text-align: center;
+}
+
+.pagination {
+    margin-bottom: -12px;
+}
+
+.pagination > li > span,
+.pagination > .disabled > span {
+    background: rgba(255, 255, 255, 0.55);
+}
+
+    .pagination > .disabled > span:hover {
+        background-color: #eee;
+        border-color: #ddd;
+        color: #23527c;
+    }
+
+.pagination > .active > span {
+    background: #82a1d2;
+    border-color: rgba(131, 174, 211, 1);
+}
+
+.grid-search {
+    background-color: rgba(255, 255, 255, 0.7);
+    margin-left: 15px;
+    text-align: center;
+    color: #000000;
+    border: none;
+}
+
+.rows-per-page {
+    display: inline-block;
+}
+
+.rows-per-page select {
+    height: 33px;
+}
+
+h1 {
+    font-size: 1em;
+    margin: 3px 0;
+}

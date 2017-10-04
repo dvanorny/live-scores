@@ -8,6 +8,9 @@ namespace LiveScoresWeb.Models
         [Required]
         [Display(Name = "Display Name")]
         public string Email { get; set; }
+
+		[Required]
+		public string Username { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -63,8 +66,12 @@ namespace LiveScoresWeb.Models
     }
 
     public class RegisterViewModel
-    {
-        [Required]
+	{
+		[Required]
+		[Display(Name = "Username")]
+		public string Username { get; set; }
+
+		[Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
