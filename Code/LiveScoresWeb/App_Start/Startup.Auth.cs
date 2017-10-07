@@ -61,8 +61,10 @@ namespace LiveScoresWeb
 			app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
 			{
 				ClientId = "333947691870-s699kqo204mqbd8chi7ujjpqmf384114.apps.googleusercontent.com",
-				ClientSecret = "AdGCr1PhRnnyInMNOsRcBtId"
+				ClientSecret = "AdGCr1PhRnnyInMNOsRcBtId",
+				CallbackPath = new PathString("/signin-google")
 			});
+			
 		}
     }
 }

@@ -344,9 +344,15 @@ namespace LiveScoresSite.Controllers
             }
         }
 
-        //
-        // POST: /Account/ExternalLoginConfirmation
-        [HttpPost]
+	    [AllowAnonymous]
+	    public ActionResult ExternalLoginCallbackRedirect(string returnUrl)
+	    {
+		    return RedirectPermanent("/Account/ExternalLoginCallback");
+	    }
+
+		//
+		// POST: /Account/ExternalLoginConfirmation
+		[HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)

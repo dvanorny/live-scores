@@ -21,7 +21,7 @@ namespace LiveScoresWeb
 			//bundles.Add(new ScriptBundle("~/Scripts/JQueryUI/JQueryBundle").Include("~/Scripts/JQueryUI/*.js"));
 			//bundles.Add(new ScriptBundle("~/Scripts/MvcGrid/MvcGridBundle").Include("~/Scripts/MvcGrid/*.js"));
 			//bundles.Add(new ScriptBundle("~/Scripts/Shared/SharedBundle").Include("~/Scripts/Shared/*.js"));
-			//bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
+			bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
 		}
 		private static void RegisterStyles(BundleCollection bundles)
 		{
