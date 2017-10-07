@@ -6,13 +6,12 @@
 		<tr>
 			<td>
 				<h3 class="list-title">Bet History</h3>
+			</td><td>
+				<input class="form-control" id="searchbox" type="text" placeholder="Search..." style="width:250px; padding:2px; margin-left: 40px; margin-top: -5px; text-align: left;">
 			</td>
-			@*<td>
-					<input class="form-control" id="searchbox" type="text" placeholder="Search..." style="width:250px; padding:2px; margin-left: 40px; margin-top: -5px; text-align: left;">
-				</td>*@
 		</tr>
 	</table>
-	@*<button class="new-site-button" style="width:100px;"><i class='fa fa-user-plus' aria-hidden='true'></i> New Site</button>*@
+	<button class="new-site-button" style="width: 100px;"><i class='fa fa-user-plus' aria-hidden='true'></i> New Bet</button>
 </div>
 <div>
 	@(Html
@@ -33,7 +32,7 @@
 			//columns.Add(model => model.SiteUrl).Titled("URL").Filterable(true);
 			//columns.Add(model => model.DatabaseServer).Titled("DB Server").Filterable(true);
 			//columns.Add(model => model.SelfHosted).RenderedAs(model => "<div align='center'><i class=\"" + model.SelfHostedDisplay + " greeniconcolor\" style=\"font-size:1.3em;\" aria-hidden='true'></i></div>").Titled("SH").Encoded(false).Filterable(true);
-			columns.Add(model => "<div align='center'><button class=\"edit_button\" style=\"width:65px;\" data-id=\"" + model.BetId + "\"><i class='fa fa-info-circle' aria-hidden='true'></i> Info</button></div>").Encoded(false);
+			columns.Add(model => "<div align='center'><button class=\"edit_button\" style=\"width:65px;\" data-id=\"" + model.BetId + "\"><i class='fa fa-info-circle' aria-hidden='true'></i> Edit</button></div>").Encoded(false);
 		})
 		.Css("hoverTable")
 		.Filterable()
@@ -98,17 +97,12 @@
 		    var searchText = vars['Grid-SiteName-Contains'];
 		    $('#searchbox').val(searchText);
 	    }
-
-        function openLoginPage(id) {
-            //var url = "@Url.Action("AutoLogin", "PatientRegistry")/" + id;
-            window.open(url);
-        }
-
+		
         function WireEvents() {
             $(document).on("click", ".edit_button", function () {
-                var site_id = $(this).attr("data-id");
-                console.log("ID: " + site_id);
-                window.location.href = "@Url.Action("Edit", "Bets")/" + site_id;
+				var bet_id = $(this).attr("data-id");
+                console.log("ID: " + bet_id);
+                window.location.href = "@Url.Action("Edit", "Bets")/" + bet_id;
             });
 
             $(document).on("click", ".new-site-button", function () {

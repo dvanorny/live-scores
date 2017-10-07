@@ -27,7 +27,7 @@ namespace LiveScores.Entities
 		public bool PersonVanorny { get; set; }
 		public bool PersonBorst { get; set; }
 		public bool PersonTschida { get; set; }
-		public bool PersonLesinksi { get; set; }
+		public bool PersonLesinski { get; set; }
 		public bool PersonKerber { get; set; }
 		public DateTime CreatedOn { get; set; }
 
@@ -35,7 +35,7 @@ namespace LiveScores.Entities
 		{
 			get
 			{
-				if (PersonBorst && PersonKerber && PersonLesinksi && PersonTschida && PersonVanorny)
+				if (PersonBorst && PersonKerber && PersonLesinski && PersonTschida && PersonVanorny)
 					return true;
 				return false;
 			}

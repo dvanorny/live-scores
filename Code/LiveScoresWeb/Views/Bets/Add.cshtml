@@ -1,11 +1,116 @@
 ﻿@model LiveScoresWeb.Entities.BetObj
 
 <div style="background:White; padding:10px;">
-   
+	@using (Html.BeginForm())
+	{
+		@Html.ValidationSummary(true)
+
+		<div class="form-horizontal">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Bet ID</label>
+						<div class="col-sm-3" style="margin-top: 7px;">
+							@Html.DisplayFor(x => x.BetId)
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Sport</label>
+						<div class="col-sm-3">
+							@Html.TextBoxFor(x => x.Sport, new { Style = "padding:2px;", @class = "form-control" })
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Bet Date</label>
+						<div class="col-sm-4">
+							<input type="date" id="BetDate" name="BetDate" class="form-control" value="@(Model.BetDate.ToString("yyyy-MM-dd"))" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Details</label>
+						<div class="col-lg-9">
+							@Html.TextBoxFor(x => x.Details, new { Style = "padding:2px;", @class = "form-control" })
+							@Html.ValidationMessageFor(x => x.Details)
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Risking ($)</label>
+						<div class="col-sm-3">
+							@Html.TextBoxFor(x => x.Risking, new { Style = "padding:2px;", @class = "form-control" })
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">To Collect ($)</label>
+						<div class="col-sm-3">
+							@Html.TextBoxFor(x => x.ToCollect, new { Style = "padding:2px;", @class = "form-control" })
+						</div>
+					</div>
+					@*<div class="form-group">
+							<label class="col-sm-2 control-label">Self-Hosted</label>
+							<div class="col-sm-10">
+								@Html.CheckBoxFor(x => x.GroupBet, new { Style = "width:20px;margin:0;", @class = "form-control" })
+							</div>
+						</div>*@
+
+					<div class="form-group" style="margin-top: 10px;">
+						<div class="col-sm-offset-3 col-sm-8">
+							<button type="submit" class="btn btn-success btn-save-width">
+								<i class="fa fa-floppy-o"></i> Save
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-lg-6">
+								<label class="col-sm-4 control-label">Lesinski: </label>
+								@Html.CheckBoxFor(x => x.PersonLesinski, new { Style = "width:30px;", @class = "form-control" })
+							</div>
+							<div class="col-lg-6">
+								<label class="col-sm-4 control-label">Borst: </label>
+								@Html.CheckBoxFor(x => x.PersonBorst, new { Style = "width:30px;", @class = "form-control" })
+							</div>
+							<div class="col-lg-6">
+								<label class="col-sm-4 control-label">Kerber: </label>
+								@Html.CheckBoxFor(x => x.PersonKerber, new { Style = "width:30px;", @class = "form-control" })
+							</div>
+							<div class="col-lg-6">
+								<label class="col-sm-4 control-label">Tschida: </label>
+								@Html.CheckBoxFor(x => x.PersonTschida, new { Style = "width:30px;", @class = "form-control" })
+							</div>
+							<div class="col-lg-6">
+								<label class="col-sm-4 control-label">Vanorny: </label>
+								@Html.CheckBoxFor(x => x.PersonVanorny, new { Style = "width:30px;", @class = "form-control" })
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			@Html.HiddenFor(x => x.BetId)
+		</div>
+	}
 </div>
 
 @section scripts {
-    <script>
-        
-    </script>
+	<script>
+
+		$(document)
+			.ready(function () {
+				$("#" + "@Html.IdFor(model => model.Details)").focus();
+			});
+
+		$(window).bind('keydown', function(event) {
+			if (event.ctrlKey || event.metaKey) {
+				switch (String.fromCharCode(event.which).toLowerCase()) {
+				case 's':
+					event.preventDefault();
+					alert('ctrl-s');
+					(this).find('form:first').submit();
+					break;
+				}
+			}
+
+	</script>
 }

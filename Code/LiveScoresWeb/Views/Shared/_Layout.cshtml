@@ -6,10 +6,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>LVFC Scoreboard</title>
 	<link rel="icon" href="@Url.Content("~/favicon.ico")" />
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 	@Styles.Render("~/Content/AllCssBundle")
+	@Styles.Render("~/Content/Site.css")
+	@Styles.Render("~/Content/FontAwesome/FontAwesomeBundle")
 	<link href="@Url.Action("Index", "Style")" rel="stylesheet" type="text/css" />
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	<link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+
 	<style>
 		.cell-center {
 			text-align: center;
@@ -29,63 +33,77 @@
 			background: grey;
 			color: black;
 		}
+
+		.list-title {
+			color: white;
+			font-size: 22px;
+			margin-top: 0;
+		}
+
+		.new-site-button {
+			width: 100px;
+			float: right;
+			margin-bottom: 10px;
+			margin-top: -38px;
+			padding: 5px;
+		}
 	</style>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-					<li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Bets", "Index", "Bets")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				@Html.ActionLink("LVFC Scoreboard", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li>@Html.ActionLink("Home", "Index", "Home")</li>
+					<li>@Html.ActionLink("Live Scores", "Index", "Scoreboard")</li>
+					<li>@Html.ActionLink("Bets", "Index", "Bets")</li>
+					@*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+				</ul>
+				@Html.Partial("_LoginPartial")
+			</div>
+		</div>
+	</div>
+	<div class="container body-content">
+		@RenderBody()
+		<hr />
+		<footer>
+			<p>&copy; @DateTime.Now.Year</p>
+		</footer>
+	</div>
 
 
-@Scripts.Render("~/Scripts/AllJsBundle")
-@RenderSection("scripts", required: false)
+	@Scripts.Render("~/Scripts/AllJsBundle")
+	@RenderSection("scripts", required: false)
 
-<script>
-	//$("#refreshSelect").change(function (){
-	//	alert($(this).val());
-	//});
+	<script>
+		//$("#refreshSelect").change(function (){
+		//	alert($(this).val());
+		//});
 
-	$(document).ready(function () {
-		var refreshRate = localStorage.getItem("refresh-rate");
-		if (refreshRate != null && refreshRate !== "") {
-			$('#refreshSelect').val(refreshRate);
-			$('#refreshSelect').change();
-		}
-	});
-
-	$('#refreshSelect').change(function () {
-		$(this).find(":selected").each(function () {
-			var newVal = $(this).val();
-			console.log("Auto refreshed changed to: " + newVal);
-			localStorage.setItem("refresh-rate", newVal);
-			setInterval('window.location.reload()', newVal);
+		$(document).ready(function () {
+			var refreshRate = localStorage.getItem("refresh-rate");
+			if (refreshRate != null && refreshRate !== "") {
+				$('#refreshSelect').val(refreshRate);
+				$('#refreshSelect').change();
+			}
 		});
-	});
-</script>
+
+		$('#refreshSelect').change(function () {
+			$(this).find(":selected").each(function () {
+				var newVal = $(this).val();
+				console.log("Auto refreshed changed to: " + newVal);
+				localStorage.setItem("refresh-rate", newVal);
+				setInterval('window.location.reload()', newVal);
+			});
+		});
+	</script>
 </body>
 </html>

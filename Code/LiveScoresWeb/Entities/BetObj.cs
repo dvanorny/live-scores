@@ -9,25 +9,25 @@ namespace LiveScoresWeb.Entities
 		public int BetId { get; set; }
 		public string Sport { get; set; }
 
-		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yy}", ConvertEmptyStringToNull = true)]
+		[DataType(DataType.Date)]
 		public DateTime BetDate { get; set; }
-
+		
+		[Required]
 		public string Details { get; set; }
 
 		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:0.00}", ConvertEmptyStringToNull = true)]
-		[DataType(DataType.Currency)]
-		public decimal Risking { get; set; }
+		public float Risking { get; set; }
 
-		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:0.00}", ConvertEmptyStringToNull = true)]
-		[DataType(DataType.Currency)]
-		public decimal ToCollect { get; set; }
+		//[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:0.00}", ConvertEmptyStringToNull = true)]
+		[DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+		public float ToCollect { get; set; }
 
 		public string Outcome { get; set; }
 		public string GroupBet { get; set; }
 		public bool PersonVanorny { get; set; }
 		public bool PersonBorst { get; set; }
 		public bool PersonTschida { get; set; }
-		public bool PersonLesinksi { get; set; }
+		public bool PersonLesinski { get; set; }
 		public bool PersonKerber { get; set; }
 		public DateTime CreatedOn { get; set; }
 
@@ -35,7 +35,7 @@ namespace LiveScoresWeb.Entities
 		{
 			get
 			{
-				if (PersonBorst && PersonKerber && PersonLesinksi && PersonTschida && PersonVanorny)
+				if (PersonBorst && PersonKerber && PersonLesinski && PersonTschida && PersonVanorny)
 					return true;
 				return false;
 			}
@@ -45,22 +45,15 @@ namespace LiveScoresWeb.Entities
 		{
 			get
 			{
-				if (Outcome.ToUpper() == "W")
-				{
-					return "cell-win";
-				}
-				else if (Outcome.ToUpper() == "L")
-				{
-					return "cell-loss";
-				}
-				else if (Outcome.ToUpper() == "P")
-				{
-					return "cell-push";
-				}
-				else
-				{
+				if (Outcome is null)
 					return "";
-				}
+				if (Outcome.ToUpper() == "W")
+					return "cell-win";
+				if (Outcome.ToUpper() == "L")
+					return "cell-loss";
+				if (Outcome.ToUpper() == "P")
+					return "cell-push";
+				return "";
 			}
 		}
 	}
