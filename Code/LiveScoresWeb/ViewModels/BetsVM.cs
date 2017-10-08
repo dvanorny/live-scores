@@ -36,8 +36,8 @@ namespace LiveScoresWeb.ViewModels
 		public void AddNewBet(BetObj bet)
 		{
 			var sql = @"insert into Bets (BetDate, Sport, Details, Risking, ToCollect, 
-						PersonVanorny, PersonLesinski, PersonBorst, PersonKerber, PersonTschida, GroupBet)
-						values (@a, @b, @c, @d, @e, @f, @g, @h, @i, @j, @k)";
+						PersonVanorny, PersonLesinski, PersonBorst, PersonKerber, PersonTschida, GroupBet, Outcome)
+						values (@a, @b, @c, @d, @e, @f, @g, @h, @i, @j, @k, @l)";
 
 			var queryParams = new
 			{
@@ -51,17 +51,26 @@ namespace LiveScoresWeb.ViewModels
 				h = bet.PersonBorst,
 				i = bet.PersonKerber,
 				j = bet.PersonTschida,
-				k = bet.PersonBorst && bet.PersonKerber && bet.PersonLesinski && bet.PersonTschida && bet.PersonVanorny
+				k = FindIfGroupBet(bet),
+				l = bet.Outcome
 			};
 
 			IDbConnection db = new SqlConnection(sqlPath);
 			db.Execute(sql, queryParams);
 		}
 
+		private string FindIfGroupBet(BetObj bet)
+		{
+			if (bet.PersonBorst && bet.PersonKerber && bet.PersonLesinski && bet.PersonTschida && bet.PersonVanorny)
+				return "Y";
+			else
+				return "N";
+		}
+
 		public void UpdateBetItem(BetObj bet)
 		{
 			var sql = @"update Bets set BetDate=@a, Sport=@b, Details=@c, Risking=@d, ToCollect=@e, 
-						PersonVanorny=@f, PersonLesinski=@g, PersonBorst=@h, PersonKerber=@i, PersonTschida=@j, GroupBet=@k
+						PersonVanorny=@f, PersonLesinski=@g, PersonBorst=@h, PersonKerber=@i, PersonTschida=@j, GroupBet=@k, Outcome=@l
 						where BetId=@id";
 
 			var queryParams = new
@@ -76,7 +85,8 @@ namespace LiveScoresWeb.ViewModels
 				h = bet.PersonBorst,
 				i = bet.PersonKerber,
 				j = bet.PersonTschida,
-				k = bet.PersonBorst && bet.PersonKerber && bet.PersonLesinski && bet.PersonTschida && bet.PersonVanorny,
+				k = FindIfGroupBet(bet),
+				l = bet.Outcome,
 				id = bet.BetId
 			};
 

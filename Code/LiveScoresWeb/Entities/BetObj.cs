@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.EnterpriseServices.Internal;
 
@@ -56,5 +57,7 @@ namespace LiveScoresWeb.Entities
 				return "";
 			}
 		}
+		public IEnumerable<OutcomeObj> OutcomesList { get; set; }
+
 	}
 }

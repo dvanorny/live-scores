@@ -213,6 +213,8 @@
     <Compile Include="Controllers\StyleController.cs" />
     <Compile Include="Entities\BetObj.cs" />
     <Compile Include="Entities\NflGame.cs" />
+    <Compile Include="Entities\NflLiveBetObj.cs" />
+    <Compile Include="Entities\OutcomeObj.cs" />
     <Compile Include="Entities\PageViewItem.cs" />
     <Compile Include="Entities\SettingObj.cs" />
     <Compile Include="Entities\StyleEditPageObj.cs" />

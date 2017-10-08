@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using LiveScoresWeb.Entities;
@@ -40,6 +41,7 @@ namespace LiveScoresWeb.Controllers
 			newBet.GroupBet = "Y";
 			newBet.Sport = "NFL";
 
+			GetDataForDropdowns(ref newBet);
 			return View(newBet);
 		}
 
@@ -64,8 +66,22 @@ namespace LiveScoresWeb.Controllers
 			SharedVM.LogPageHit("Bets/Edit/" + id, User.Identity.Name);
 
 			var vm = new BetsVM(dbConn);
-			var thisSite = vm.GetSingleBet(id);
-			return View(thisSite);
+			var thisBet = vm.GetSingleBet(id);
+			GetDataForDropdowns(ref thisBet);
+			return View(thisBet);
+		}
+
+		public void GetDataForDropdowns(ref BetObj thisBet)
+		{
+			var myList = new List<OutcomeObj>
+			{
+				new OutcomeObj() {OutcomeId = "", Description = ""},
+				new OutcomeObj() {OutcomeId = "W", Description = "Win"},
+				new OutcomeObj() {OutcomeId = "L", Description = "Loss"},
+				new OutcomeObj() {OutcomeId = "P", Description = "Push"}
+			};
+
+			thisBet.OutcomesList = myList;
 		}
 
 		[HttpPost]

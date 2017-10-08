@@ -10,7 +10,7 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label class="col-sm-3 control-label">Bet ID</label>
-						<div class="col-sm-3" style="margin-top: 7px;">
+						<div class="col-sm-3">
 							@Html.DisplayFor(x => x.BetId)
 						</div>
 					</div>
@@ -28,7 +28,7 @@
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label">Details</label>
-						<div class="col-lg-9">
+						<div class="col-sm-9">
 							@Html.TextBoxFor(x => x.Details, new { Style = "padding:2px;", @class = "form-control" })
 							@Html.ValidationMessageFor(x => x.Details)
 						</div>
@@ -45,12 +45,12 @@
 							@Html.TextBoxFor(x => x.ToCollect, new { Style = "padding:2px;", @class = "form-control" })
 						</div>
 					</div>
-					@*<div class="form-group">
-							<label class="col-sm-2 control-label">Self-Hosted</label>
-							<div class="col-sm-10">
-								@Html.CheckBoxFor(x => x.GroupBet, new { Style = "width:20px;margin:0;", @class = "form-control" })
-							</div>
-						</div>*@
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Outcome</label>
+						<div class="col-sm-3">
+							@Html.DropDownListFor(x => x.Outcome, new SelectList(Model.OutcomesList, "OutcomeId", "Description"), new { @class = "form-control" })
+						</div>
+					</div>
 
 					<div class="form-group" style="margin-top: 10px;">
 						<div class="col-sm-offset-3 col-sm-8">
@@ -63,27 +63,33 @@
 
 				<div class="col-sm-6">
 					<div class="form-group">
-						<div class="row">
-							<div class="col-lg-6">
-								<label class="col-sm-4 control-label">Lesinski: </label>
-								@Html.CheckBoxFor(x => x.PersonLesinski, new { Style = "width:30px;", @class = "form-control" })
-							</div>
-							<div class="col-lg-6">
-								<label class="col-sm-4 control-label">Borst: </label>
-								@Html.CheckBoxFor(x => x.PersonBorst, new { Style = "width:30px;", @class = "form-control" })
-							</div>
-							<div class="col-lg-6">
-								<label class="col-sm-4 control-label">Kerber: </label>
-								@Html.CheckBoxFor(x => x.PersonKerber, new { Style = "width:30px;", @class = "form-control" })
-							</div>
-							<div class="col-lg-6">
-								<label class="col-sm-4 control-label">Tschida: </label>
-								@Html.CheckBoxFor(x => x.PersonTschida, new { Style = "width:30px;", @class = "form-control" })
-							</div>
-							<div class="col-lg-6">
-								<label class="col-sm-4 control-label">Vanorny: </label>
-								@Html.CheckBoxFor(x => x.PersonVanorny, new { Style = "width:30px;", @class = "form-control" })
-							</div>
+						<label class="col-sm-3 control-label">Lesinski </label>
+						<div class="col-sm-3">
+							@Html.CheckBoxFor(x => x.PersonLesinski, new { Style = "width:30px;", @class = "form-control" })
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Borst </label>
+						<div class="col-sm-3">
+							@Html.CheckBoxFor(x => x.PersonBorst, new { Style = "width:30px;", @class = "form-control" })
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Kerber </label>
+						<div class="col-sm-3">
+							@Html.CheckBoxFor(x => x.PersonKerber, new { Style = "width:30px;", @class = "form-control" })
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Tschida </label>
+						<div class="col-sm-3">
+							@Html.CheckBoxFor(x => x.PersonTschida, new { Style = "width:30px;", @class = "form-control" })
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Vanorny </label>
+						<div class="col-sm-3">
+							@Html.CheckBoxFor(x => x.PersonVanorny, new { Style = "width:30px;", @class = "form-control" })
 						</div>
 					</div>
 				</div>

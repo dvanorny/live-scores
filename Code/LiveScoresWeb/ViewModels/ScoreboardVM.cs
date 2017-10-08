@@ -1,15 +1,86 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Xml;
+using Dapper;
 using LiveScoresWeb.Entities;
 
 namespace LiveScoresWeb.ViewModels
 {
 	public class ScoreboardVM
 	{
+		private string sqlPath;
+
+		public ScoreboardVM(string connPath)
+		{
+			sqlPath = connPath;
+		}
+
+		public IList<NflLiveBetObj> CreateLiveUpdate(IList<NflLiveBetObj> bets, IList<NflGame> games)
+		{
+			var combinedList = new List<NflLiveBetObj>();
+			foreach (var bet in bets)
+			{
+				//Find the score
+				var game = games.First(x => x.GameId.Equals(bet.ExternalId));
+				bet.VisitorScore = game.VisitorScore;
+				bet.HomeScore = game.HomeScore;
+				bet.CurrentQuarter = game.CurrentQuarter;
+				bet.GameTime = game.GameTime;
+				bet.VisitorTeamAbbrev = game.VisitorTeamAbbrev;
+				bet.VisitorTeamName = game.VisitorTeamName;
+				bet.HomeTeamName = game.HomeTeamName;
+				bet.HomeTeamAbbrev = game.HomeTeamAbbrev;
+				bet.GameId = game.GameId;
+				//Figure out the CurrentStatus property
+				if (bet.CurrentQuarter == "P")
+					bet.CurrentStatus = "";
+				else
+				{
+					switch (bet.TypeOfBet)
+					{
+						case 1:
+							var numberToHit = Convert.ToDecimal(bet.BetNumber);
+							if (bet.HomeScore + bet.VisitorScore > numberToHit)
+								bet.CurrentStatus = "WINNING";
+							else if (bet.HomeScore + bet.VisitorScore == numberToHit)
+								bet.CurrentStatus = "PUSH";
+							else
+								bet.CurrentStatus = "LOSING";
+							break;
+						case 2:
+							var numberToHit2 = Convert.ToDecimal(bet.BetNumber);
+							if (bet.HomeScore + bet.VisitorScore < numberToHit2)
+								bet.CurrentStatus = "WINNING";
+							else if (bet.HomeScore + bet.VisitorScore == numberToHit2)
+								bet.CurrentStatus = "PUSH";
+							else
+								bet.CurrentStatus = "LOSING";
+							break;
+					}
+				}
+
+
+				combinedList.Add(bet);
+			}
+			return combinedList;
+		}
+
+		public IList<NflLiveBetObj> GetNflBets()
+		{
+			IDbConnection db = new SqlConnection(sqlPath);
+			var query = @"select a.BetId, a.BetDate, a.Details, a.Risking, a.ToCollect, a.GroupBet, b.ExternalId, b.TypeOfBet, b.BetTeam, b.BetNumber, a.Notes
+							from NflBets b
+							inner join Bets a on a.BetId=b.BetId
+							where a.Sport='NFL' and (a.Outcome='' or a.Outcome is null)";
+			var results = db.Query<NflLiveBetObj>(query).OrderBy(x => x.BetDate).ToList();
+			return results;
+		}
 
 		public IList<NflGame> GetNflScores()
 		{
