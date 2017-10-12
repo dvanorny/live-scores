@@ -62,6 +62,27 @@ namespace LiveScoresWeb.ViewModels
 							else
 								bet.CurrentStatus = "LOSING";
 							break;
+						case 4:
+							var betNum = bet.BetNumber;
+							if (betNum.StartsWith("-"))
+							{
+								var spread = Convert.ToDecimal(betNum.Substring(1));
+								if (bet.HomeScore - spread > bet.VisitorScore)
+									bet.CurrentStatus = "WINNING";
+								else if (bet.HomeScore - spread == bet.VisitorScore)
+									bet.CurrentStatus = "PUSH";
+								else
+									bet.CurrentStatus = "LOSING";
+							} else if (betNum.StartsWith("+")) {
+								var spread = Convert.ToDecimal(betNum.Substring(1));
+								if (bet.VisitorScore - spread < bet.HomeScore)
+									bet.CurrentStatus = "WINNING";
+								else if (bet.VisitorScore - spread == bet.HomeScore)
+									bet.CurrentStatus = "PUSH";
+								else
+									bet.CurrentStatus = "LOSING";
+							}
+							break;
 					}
 				}
 

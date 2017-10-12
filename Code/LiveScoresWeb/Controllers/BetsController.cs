@@ -32,11 +32,11 @@ namespace LiveScoresWeb.Controllers
 		{
 			SharedVM.LogPageHit("Bets/Add", User.Identity.Name);
 			var newBet = new BetObj();
-			newBet.PersonBorst = true;
-			newBet.PersonKerber = true;
-			newBet.PersonLesinski = true;
-			newBet.PersonTschida = true;
-			newBet.PersonVanorny = true;
+			newBet.AB = true;
+			newBet.JK = true;
+			newBet.CL = true;
+			newBet.AT = true;
+			newBet.DV = true;
 			newBet.BetDate = DateTime.Today;
 			newBet.GroupBet = "Y";
 			newBet.Sport = "NFL";

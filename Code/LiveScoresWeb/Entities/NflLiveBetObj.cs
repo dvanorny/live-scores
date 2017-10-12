@@ -23,6 +23,24 @@ namespace LiveScoresWeb.Entities
 		public string DayOfWeek { get; set; }
 		public string GameTime { get; set; }
 
+		public string StatusStyle
+		{
+			get
+			{
+
+				switch (CurrentStatus.ToUpper())
+				{
+					case "WINNING":
+						return "background:green;color:white;";
+					case "LOSING":
+						return "background:red;color:black;";
+					case "PUSH":
+						return "background:lightgrey;color:black;";
+					default:
+						return "";
+				}
+			}
+		}
 		public string CurrentQuarter { get; set; }
 		public string CurrentQuarterDisplay
 		{
@@ -35,13 +53,13 @@ namespace LiveScoresWeb.Entities
 					case "f":
 						return "FINAL";
 					case "1":
-						return "1";
+						return "Q1";
 					case "2":
-						return "2";
+						return "Q2";
 					case "3":
-						return "3";
+						return "Q3";
 					case "4":
-						return "4";
+						return "Q4";
 					default:
 						return "";
 				}
@@ -71,7 +89,12 @@ namespace LiveScoresWeb.Entities
 					case 3:
 						return String.Concat(BetTeam, " ML");
 					case 4:
-						return String.Concat(BetTeam, " ", BetNumber);
+						if (BetNumber.StartsWith("-"))
+							return String.Concat(HomeTeamAbbrev, " ", BetNumber);
+						else if (BetNumber.StartsWith("+"))
+							return String.Concat(VisitorTeamAbbrev, " ", BetNumber);
+						else
+							return BetNumber;
 				}
 				return "";
 			}

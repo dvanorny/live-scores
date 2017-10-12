@@ -25,18 +25,18 @@ namespace LiveScoresWeb.Entities
 
 		public string Outcome { get; set; }
 		public string GroupBet { get; set; }
-		public bool PersonVanorny { get; set; }
-		public bool PersonBorst { get; set; }
-		public bool PersonTschida { get; set; }
-		public bool PersonLesinski { get; set; }
-		public bool PersonKerber { get; set; }
+		public bool DV { get; set; }
+		public bool AB { get; set; }
+		public bool AT { get; set; }
+		public bool CL { get; set; }
+		public bool JK { get; set; }
 		public DateTime CreatedOn { get; set; }
 
 		public bool AllBet
 		{
 			get
 			{
-				if (PersonBorst && PersonKerber && PersonLesinski && PersonTschida && PersonVanorny)
+				if (AB && JK && CL && AT && DV)
 					return true;
 				return false;
 			}

@@ -6,9 +6,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>LVFC Scoreboard</title>
 	<link rel="icon" href="@Url.Content("~/favicon.ico")" />
+	@Styles.Render("~/Content/FontAwesomeBundle")
 	@Styles.Render("~/Content/AllCssBundle")
 	@Styles.Render("~/Content/Site.css")
-	@Styles.Render("~/Content/FontAwesome/FontAwesomeBundle")
+	@Styles.Render("~/Content/DataTablesBundle")
 	<link href="@Url.Action("Index", "Style")" rel="stylesheet" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
@@ -47,6 +48,18 @@
 			margin-top: -38px;
 			padding: 5px;
 		}
+		.bet-details {
+			font-weight: bold;
+			border: 2px solid whitesmoke;
+			margin-left: 10px;
+			padding-left: 6px;
+			padding-right: 6px;
+			border-radius: 10px;
+		}
+		.btn-space {
+			margin-right: 10px;
+			margin-bottom: 5px;
+		}
 	</style>
 </head>
 <body>
@@ -65,6 +78,7 @@
 					<li>@Html.ActionLink("Home", "Index", "Home")</li>
 					<li>@Html.ActionLink("Live Scores", "Index", "Scoreboard")</li>
 					<li>@Html.ActionLink("Bets", "Index", "Bets")</li>
+					<li>@Html.ActionLink("Reports", "Scripts", "Query")</li>
 					@*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
 				</ul>
 				@Html.Partial("_LoginPartial")
@@ -79,8 +93,8 @@
 		</footer>
 	</div>
 
-
-	@Scripts.Render("~/Scripts/AllJsBundle")
+		@Scripts.Render("~/Scripts/AllJsBundle")
+		@Scripts.Render("~/Scripts/DataTablesBundle")
 	@RenderSection("scripts", required: false)
 
 	<script>

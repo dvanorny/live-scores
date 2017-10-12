@@ -1,0 +1,92 @@
+﻿@model LiveScoresWeb.Entities.QueryObj
+
+<div style="background:White; padding:10px;">
+	@using (Html.BeginForm())
+	{
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label"><i>Saved Queries:</i></label>
+				<div class="col-lg-8">
+					@Html.DropDownListFor(m => m.QueryId, Model.SavedQueries, "Select one", new { Style = "width:400px; height:35px;" })
+					&nbsp;
+					<button type="submit" class="btn btn-warning" style="height: 30px; padding: 2px 20px;">
+						<i class="fa fa-css3"></i> Run Query
+					</button>
+				</div>
+			</div>
+		</div>
+	}
+
+	<br />
+	@if (!string.IsNullOrEmpty(Model.QueryDescription))
+	{
+		<div style="background: White; padding-left: 26px; color: darkslateblue;"><span style="font-weight: bold;">Query Description: </span>@Model.QueryDescription</div>
+	}
+
+	<div style="background: White; padding: 10px;">
+		@if (string.IsNullOrEmpty(Model.QueryDescription) && Model.ResultsDataTable == null)
+		{
+			<div class="h3">No results were returned</div>
+		}
+		@if (Model.ResultsDataTable != null)
+		{
+			<table id="MyTable2" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						@foreach (System.Data.DataColumn col in Model.ResultsDataTable.Columns)
+						{
+							<th>@col.Caption</th>
+						}
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (System.Data.DataRow row in Model.ResultsDataTable.Rows)
+				{
+						<tr>
+							@foreach (var cell in row.ItemArray)
+							{
+								<td>@cell.ToString()</td>
+							}
+						</tr>
+				}
+				</tbody>
+			</table>
+		}
+	</div>
+</div>
+
+
+
+@section scripts {
+	<script>
+		$(document).ready(function () {
+			$('#MyTable2').DataTable({
+				responsive: true,
+				iDisplayLength: 100,
+				lengthMenu: [[10, 50, 100, -1], [10, 50, 100, "All"]],
+				select: true,
+				aaSorting: [],
+				dom: 'Bfrtip',
+				buttons: [
+					'copy', 'excelHtml5'
+				]
+			});
+		});
+
+		//$(document).ready(function () {
+		//	$('#mytable').DataTable({
+		//		select: true,
+		//		dom: 'Bfrtip',
+		//		buttons: [
+		//			'copy', 'excel', 'pdf'
+		//		]
+		//	});
+		//	$('#MyTable2').DataTable({
+		//		select: true,
+		//		dom: 'Bfrtip',
+		//		buttons: [
+		//			'copy', 'excel', 'pdf'
+		//		]
+		//	});
+	</script>
+}

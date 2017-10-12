@@ -12,8 +12,8 @@ namespace LiveScores.Controllers
 		protected override void OnActionExecuting(ActionExecutingContext ctx)
 		{
 			var user = User.Identity.Name;
-			var view = SharedVM.DisplayBannerBit(user) ? "contents" : "none";
-			ViewBag.DisplayBanner = view;
+			//var view = SharedVM.DisplayBannerBit(user) ? "contents" : "none";
+			//ViewBag.DisplayBanner = view;
 		}
 
 		public ActionResult CloseBanner()
