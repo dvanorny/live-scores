@@ -1,4 +1,5 @@
-﻿using System.Web.Configuration;
+﻿using System.Linq;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using LiveScoresWeb.ViewModels;
 
@@ -15,12 +16,15 @@ namespace LiveScoresWeb.Controllers
 			SharedVM.LogPageHit("Scoreboard/Index", User.Identity.Name);
 
 			var vm = new ScoreboardVM(dbConn);
+			var myBets = vm.GetScoreboardBets();
+			var includesNflGame = myBets.Any(bet => bet.Sport.ToUpper() == "NFL");
+			if (includesNflGame)
+			{
+				var nflScores = vm.GetNflScores();
+				myBets = vm.CreateLiveUpdate(myBets, nflScores);
+			}
 
-			var gamesList = vm.GetNflScores();
-			var nflBets = vm.GetNflBets();
-			var liveList = vm.CreateLiveUpdate(nflBets, gamesList);
-
-			return View(liveList);
+			return View(myBets);
 		}
 	}
 }

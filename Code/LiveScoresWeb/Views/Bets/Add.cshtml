@@ -1,7 +1,7 @@
 ﻿@model LiveScoresWeb.Entities.BetObj
 
 <div style="background:White; padding:10px;">
-	@using (Html.BeginForm())
+	@using (Html.BeginForm(null, null, FormMethod.Post, new { name = "mainform", id = "mainform" }))
 	{
 		@Html.ValidationSummary(true)
 
@@ -10,7 +10,7 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label class="col-sm-3 control-label">Bet ID</label>
-						<div class="col-sm-3">
+						<div class="col-sm-3"style="margin-top: 7px;">
 							@Html.DisplayFor(x => x.BetId)
 						</div>
 					</div>
@@ -22,7 +22,7 @@
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label">Bet Date</label>
-						<div class="col-sm-4">
+						<div class="col-sm-5">
 							<input type="date" id="BetDate" name="BetDate" class="form-control" value="@(Model.BetDate.ToString("yyyy-MM-dd"))" />
 						</div>
 					</div>
@@ -103,20 +103,22 @@
 	<script>
 
 		$(document)
-			.ready(function () {
-				$("#" + "@Html.IdFor(model => model.Details)").focus();
+			.ready(function() {
+				$("#@Html.IdFor(model => model.Details)").focus();
 			});
 
-		$(window).bind('keydown', function(event) {
-			if (event.ctrlKey || event.metaKey) {
-				switch (String.fromCharCode(event.which).toLowerCase()) {
-				case 's':
-					event.preventDefault();
-					alert('ctrl-s');
-					(this).find('form:first').submit();
-					break;
+		$(window).bind('keydown',
+			function(event) {
+				if (event.ctrlKey || event.metaKey) {
+					switch (String.fromCharCode(event.which).toLowerCase()) {
+					case 's':
+						event.preventDefault();
+						//alert("Saving form...");
+						$("#mainform").submit();
+						break;
+					}
 				}
-			}
+			});
 
 	</script>
 }

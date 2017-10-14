@@ -28,7 +28,7 @@ namespace LiveScoresWeb.Controllers
 			return RedirectToAction("Index");
 		}
 
-		public ActionResult Add()
+		public ActionResult Add(int id=0)
 		{
 			SharedVM.LogPageHit("Bets/Add", User.Identity.Name);
 			var newBet = new BetObj();
@@ -39,7 +39,13 @@ namespace LiveScoresWeb.Controllers
 			newBet.DV = true;
 			newBet.BetDate = DateTime.Today;
 			newBet.GroupBet = "Y";
-			newBet.Sport = "NFL";
+
+			if (id == 1)
+				newBet.Sport = "NFL";
+			else if (id == 2)
+				newBet.Sport = "CFB";
+			else
+				newBet.Sport = "";
 
 			GetDataForDropdowns(ref newBet);
 			return View(newBet);

@@ -21,85 +21,97 @@ namespace LiveScoresWeb.ViewModels
 			sqlPath = connPath;
 		}
 
-		public IList<NflLiveBetObj> CreateLiveUpdate(IList<NflLiveBetObj> bets, IList<NflGame> games)
+		public IList<LiveBetObj> CreateLiveUpdate(IList<LiveBetObj> bets, IList<NflGame> games)
 		{
-			var combinedList = new List<NflLiveBetObj>();
+			var combinedList = new List<LiveBetObj>();
 			foreach (var bet in bets)
 			{
-				//Find the score
-				var game = games.First(x => x.GameId.Equals(bet.ExternalId));
-				bet.VisitorScore = game.VisitorScore;
-				bet.HomeScore = game.HomeScore;
-				bet.CurrentQuarter = game.CurrentQuarter;
-				bet.GameTime = game.GameTime;
-				bet.VisitorTeamAbbrev = game.VisitorTeamAbbrev;
-				bet.VisitorTeamName = game.VisitorTeamName;
-				bet.HomeTeamName = game.HomeTeamName;
-				bet.HomeTeamAbbrev = game.HomeTeamAbbrev;
-				bet.GameId = game.GameId;
-				//Figure out the CurrentStatus property
-				if (bet.CurrentQuarter == "P")
-					bet.CurrentStatus = "";
-				else
+				foreach (var myGame in bet.NflItems)
 				{
-					switch (bet.TypeOfBet)
+					if (bet.Sport.ToUpper() == "NFL" && !String.IsNullOrEmpty(myGame.ExternalId))
 					{
-						case 1:
-							var numberToHit = Convert.ToDecimal(bet.BetNumber);
-							if (bet.HomeScore + bet.VisitorScore > numberToHit)
-								bet.CurrentStatus = "WINNING";
-							else if (bet.HomeScore + bet.VisitorScore == numberToHit)
-								bet.CurrentStatus = "PUSH";
-							else
-								bet.CurrentStatus = "LOSING";
-							break;
-						case 2:
-							var numberToHit2 = Convert.ToDecimal(bet.BetNumber);
-							if (bet.HomeScore + bet.VisitorScore < numberToHit2)
-								bet.CurrentStatus = "WINNING";
-							else if (bet.HomeScore + bet.VisitorScore == numberToHit2)
-								bet.CurrentStatus = "PUSH";
-							else
-								bet.CurrentStatus = "LOSING";
-							break;
-						case 4:
-							var betNum = bet.BetNumber;
-							if (betNum.StartsWith("-"))
+						//Find the score
+						var game = games.First(x => x.GameId.Equals(myGame.ExternalId));
+						myGame.VisitorScore = game.VisitorScore;
+						myGame.HomeScore = game.HomeScore;
+						myGame.CurrentQuarter = game.CurrentQuarter;
+						myGame.GameTime = game.GameTime;
+						myGame.VisitorTeamAbbrev = game.VisitorTeamAbbrev;
+						myGame.VisitorTeamName = game.VisitorTeamName;
+						myGame.HomeTeamName = game.HomeTeamName;
+						myGame.HomeTeamAbbrev = game.HomeTeamAbbrev;
+						myGame.GameId = game.GameId;
+						//Figure out the CurrentStatus property
+						if (myGame.CurrentQuarter == "P")
+							myGame.CurrentStatus = "";
+						else
+						{
+							switch (myGame.TypeOfBet)
 							{
-								var spread = Convert.ToDecimal(betNum.Substring(1));
-								if (bet.HomeScore - spread > bet.VisitorScore)
-									bet.CurrentStatus = "WINNING";
-								else if (bet.HomeScore - spread == bet.VisitorScore)
-									bet.CurrentStatus = "PUSH";
-								else
-									bet.CurrentStatus = "LOSING";
-							} else if (betNum.StartsWith("+")) {
-								var spread = Convert.ToDecimal(betNum.Substring(1));
-								if (bet.VisitorScore - spread < bet.HomeScore)
-									bet.CurrentStatus = "WINNING";
-								else if (bet.VisitorScore - spread == bet.HomeScore)
-									bet.CurrentStatus = "PUSH";
-								else
-									bet.CurrentStatus = "LOSING";
+								case 1:
+									var numberToHit = Convert.ToDecimal(myGame.BetNumber);
+									if (myGame.HomeScore + myGame.VisitorScore > numberToHit)
+										myGame.CurrentStatus = "WINNING";
+									else if (myGame.HomeScore + myGame.VisitorScore == numberToHit)
+										myGame.CurrentStatus = "PUSH";
+									else
+										myGame.CurrentStatus = "LOSING";
+									break;
+								case 2:
+									var numberToHit2 = Convert.ToDecimal(myGame.BetNumber);
+									if (myGame.HomeScore + myGame.VisitorScore < numberToHit2)
+										myGame.CurrentStatus = "WINNING";
+									else if (myGame.HomeScore + myGame.VisitorScore == numberToHit2)
+										myGame.CurrentStatus = "PUSH";
+									else
+										myGame.CurrentStatus = "LOSING";
+									break;
+								case 4:
+									var betNum = myGame.BetNumber;
+									if (betNum.StartsWith("-"))
+									{
+										var spread = Convert.ToDecimal(betNum.Substring(1));
+										if (myGame.HomeScore - spread > myGame.VisitorScore)
+											myGame.CurrentStatus = "WINNING";
+										else if (myGame.HomeScore - spread == myGame.VisitorScore)
+											myGame.CurrentStatus = "PUSH";
+										else
+											myGame.CurrentStatus = "LOSING";
+									}
+									else if (betNum.StartsWith("+"))
+									{
+										var spread = Convert.ToDecimal(betNum.Substring(1));
+										if (myGame.VisitorScore - spread < myGame.HomeScore)
+											myGame.CurrentStatus = "WINNING";
+										else if (myGame.VisitorScore - spread == myGame.HomeScore)
+											myGame.CurrentStatus = "PUSH";
+										else
+											myGame.CurrentStatus = "LOSING";
+									}
+									break;
 							}
-							break;
+						}
 					}
 				}
-
 
 				combinedList.Add(bet);
 			}
 			return combinedList;
 		}
 
-		public IList<NflLiveBetObj> GetNflBets()
+		public IList<LiveBetObj> GetScoreboardBets()
 		{
 			IDbConnection db = new SqlConnection(sqlPath);
-			var query = @"select a.BetId, a.BetDate, a.Details, a.Risking, a.ToCollect, a.GroupBet, b.ExternalId, b.TypeOfBet, b.BetTeam, b.BetNumber, a.Notes
-							from NflBets b
-							inner join Bets a on a.BetId=b.BetId
-							where a.Sport='NFL' and (a.Outcome='' or a.Outcome is null)";
-			var results = db.Query<NflLiveBetObj>(query).OrderBy(x => x.BetDate).ToList();
+			var query = @"select BetId, BetDate, Sport, Details, Risking, ToCollect, GroupBet, Outcome, Notes
+							from Bets where cast(dateadd(hour, -5, getdate()) as date) = cast(a.BetDate as date)";
+			var results = db.Query<LiveBetObj>(query).OrderBy(x => x.BetDate).ToList();
+
+			var query2 = @"select ExternalId, TypeOfBet, BetTeam, BetNumber
+							from NflGames where BetId = @id";
+			foreach (var game in results)
+			{
+				
+			}
 			return results;
 		}
 

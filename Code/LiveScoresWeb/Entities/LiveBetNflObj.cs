@@ -1,24 +1,14 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace LiveScoresWeb.Entities
 {
-	public class NflLiveBetObj
+	public class LiveBetNflObj
 	{
-		public int BetId { get; set; }
-		public string Sport { get; set; }
-		public DateTime BetDate { get; set; }
-		public string Details { get; set; }
-		public float Risking { get; set; }
-		public float ToCollect { get; set; }
-		public string Outcome { get; set; }
-		public string GroupBet { get; set; }
-
 		public string ExternalId { get; set; }
 		public int TypeOfBet { get; set; }
 		public string BetTeam { get; set; }
 		public string BetNumber { get; set; }
-		
+
 		public string GameId { get; set; }
 		public string DayOfWeek { get; set; }
 		public string GameTime { get; set; }
@@ -27,6 +17,8 @@ namespace LiveScoresWeb.Entities
 		{
 			get
 			{
+				if (String.IsNullOrEmpty(CurrentStatus))
+					return "";
 
 				switch (CurrentStatus.ToUpper())
 				{
@@ -46,6 +38,9 @@ namespace LiveScoresWeb.Entities
 		{
 			get
 			{
+				if (String.IsNullOrEmpty(CurrentQuarter))
+					return "";
+
 				switch (CurrentQuarter.ToLower())
 				{
 					case "p":

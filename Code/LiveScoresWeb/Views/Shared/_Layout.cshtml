@@ -5,15 +5,22 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>LVFC Scoreboard</title>
+
 	<link rel="icon" href="@Url.Content("~/favicon.ico")" />
-	@Styles.Render("~/Content/FontAwesomeBundle")
-	@Styles.Render("~/Content/AllCssBundle")
-	@Styles.Render("~/Content/Site.css")
-	@Styles.Render("~/Content/DataTablesBundle")
-	<link href="@Url.Action("Index", "Style")" rel="stylesheet" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-	<link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+
+	@Styles.Render("~/Content/JQueryUI/Bundle")
+	@Styles.Render("~/Content/Bootstrap/Bundle")
+	@Styles.Render("~/Content/FontAwesome/Bundle")
+	<link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/DataTables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/DataTables/extensions/Buttons/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/DataTables/extensions/Select//css/select.bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/Shared/base.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/Shared/site.css" rel="stylesheet" type="text/css" />
+	<link href="@Url.Action("Index", "Style")" rel="stylesheet" type="text/css" />
 
 	<style>
 		.cell-center {
@@ -48,6 +55,7 @@
 			margin-top: -38px;
 			padding: 5px;
 		}
+
 		.bet-details {
 			font-weight: bold;
 			border: 2px solid whitesmoke;
@@ -56,6 +64,7 @@
 			padding-right: 6px;
 			border-radius: 10px;
 		}
+
 		.btn-space {
 			margin-right: 10px;
 			margin-bottom: 5px;
@@ -93,8 +102,18 @@
 		</footer>
 	</div>
 
-		@Scripts.Render("~/Scripts/AllJsBundle")
-		@Scripts.Render("~/Scripts/DataTablesBundle")
+	@Scripts.Render("~/Scripts/jquery-3.2.1.min.js")
+	@Scripts.Render("~/Scripts/bootstrap.min.js")
+	@Scripts.Render("~/Scripts/jquery-ui.min.js")
+	@Scripts.Render("~/Scripts/jszip.min.js")
+	@Scripts.Render("~/Scripts/shortcuts.js")
+	@Scripts.Render("~/Scripts/MvcGrid/mvc-grid.min.js")
+	@Scripts.Render("~/Scripts/DataTables/media/js/jquery.dataTables.min.js")
+	@Scripts.Render("~/Scripts/DataTables/media/js/dataTables.bootstrap4.min.js")
+	@Scripts.Render("~/Scripts/DataTables/extensions/Buttons/js/dataTables.Buttons.min.js")
+	@Scripts.Render("~/Scripts/DataTables/extensions/Buttons/js/buttons.html5.min.js")
+	@Scripts.Render("~/Scripts/DataTables/extensions/Responsive/js/dataTables.responsive.min.js")
+	@Scripts.Render("~/Scripts/DataTables/extensions/Select/js/dataTables.select.min.js")
 	@RenderSection("scripts", required: false)
 
 	<script>
